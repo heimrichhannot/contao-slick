@@ -1,0 +1,17 @@
+
+<?php foreach ($this->body as $item): ?>
+		<?php if ($item->addImage): ?>
+			<div>
+				<figure class="image_container"<?php if ($item->margin): ?> style="<?php echo $item->margin; ?>"<?php endif; ?>>
+					<?php if ($item->href): ?>
+						<a href="<?php echo $item->href; ?>"<?php echo $item->attributes; ?> title="<?php echo $item->alt; ?>"><img src="<?php echo $item->src; ?>"<?php echo $item->imgSize; ?> alt="<?php echo $item->alt; ?>"></a>
+					<?php else: ?>
+						<img src="<?php echo $item->src; ?>"<?php echo $item->imgSize; ?> alt="<?php echo $item->alt; ?>">
+					<?php endif; ?>
+					<?php if ($item->caption): ?>
+						<figcaption class="caption" style="width:<?php echo $item->arrSize[0]; ?>px"><?php echo $item->caption; ?></figcaption>
+					<?php endif; ?>
+				</figure>
+			</div>
+		<?php endif; ?>
+<?php endforeach; ?>
