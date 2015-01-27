@@ -1,25 +1,24 @@
 <?php
-
 /**
  * Contao Open Source CMS
- *
+ * 
  * Copyright (c) 2015 Heimrich & Hannot GmbH
- * @package owlcarousel
+ * @package slick
  * @author Rico Kaltofen <r.kaltofen@heimrich-hannot.de>
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-namespace HeimrichHannot\OwlCarousel;
+namespace HeimrichHannot\Slick;
 
 
-class ContentOwlCarouselSlideStop extends \ContentElement
+class ContentSlickSlideSeparator extends \ContentElement
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'ce_owlcarousel_slide_stop';
+	protected $strTemplate = 'ce_slick_slide_separator';
 
 
 	/**
@@ -33,4 +32,4 @@ class ContentOwlCarouselSlideStop extends \ContentElement
 			$this->Template = new \BackendTemplate($this->strTemplate);
 		}
 	}
-}
+} 

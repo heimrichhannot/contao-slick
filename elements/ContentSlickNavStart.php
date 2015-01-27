@@ -1,24 +1,24 @@
 <?php
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2015 Heimrich & Hannot GmbH
- * @package owlcarousel
+ * @package slick
  * @author Rico Kaltofen <r.kaltofen@heimrich-hannot.de>
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-namespace HeimrichHannot\OwlCarousel;
+namespace HeimrichHannot\Slick;
 
 
-class ContentOwlCarouselContentStart extends \ContentElement
+class ContentSlickNavStart extends \ContentElement
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'ce_owlcarousel_content_start';
+	protected $strTemplate = 'ce_slick_nav_start';
 
 
 	public function generate()
@@ -32,14 +32,19 @@ class ContentOwlCarouselContentStart extends \ContentElement
 
 		parent::generate();
 
-		$objConfig = OwlConfigModel::findByPk($this->owlConfig);
+		$objConfig = SlickConfigModel::findByPk($this->slickConfig);
 
 		if ($objConfig === null) return;
 
-		OwlConfig::createConfigJs($objConfig);
+		SlickConfig::createConfigJs($objConfig);
 
-		$this->Template->class .= ' ' . OwlConfig::getCssClassFromModel($objConfig) . ' owl-carousel ' . OwlConfig::getCssClassForContent($this->id);
-		$this->Template->syncid = OwlConfig::getCssClassForContent($this->id);
+		$objSlider = \ContentModel::findByPk($this->slickContentSlider);
+
+		if($objSlider === null) return;
+
+		$this->Template->class .= ' slick-nav ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick';
+		$this->Template->syncTo = SlickConfig::getCssClassForContent($this->slickContentSlider);
+
 
 		return $this->Template->parse();
 	}

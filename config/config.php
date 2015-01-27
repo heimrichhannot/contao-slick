@@ -10,7 +10,7 @@ $GLOBALS['TL_HOOKS']['parseArticles'][]     = array('\HeimrichHannot\Slick\Hooks
  * Supported TL_DCA Entities, spreading efa palette to
  */
 // News support
-$GLOBALS['TL_SLICK']['SUPPORTED']['tl_module']['slick_newslist'] = 'skipFirst;[[SLICK_PALETTE_PRESETCONFIG]]';
+$GLOBALS['TL_SLICK']['SUPPORTED']['tl_module']['slick_newslist'] = 'type;[[SLICK_PALETTE_PRESETCONFIG]]';
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_news_archive']['default']  = 'jumpTo;[[SLICK_PALETTE_PRESETCONFIG]]';
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_news']['default']          = 'addImage;[[SLICK_PALETTE_GALLERY]]';
 
@@ -20,7 +20,7 @@ $GLOBALS['TL_SLICK']['SUPPORTED']['tl_content']['slick-content-start'] = '[[SLIC
 
 // Owl carousel config support
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_slick_config']['default'] = 'title;[[SLICK_PALETTE_FLAT]]';
-
+$GLOBALS['TL_SLICK']['SUPPORTED']['tl_module']['slick_combinedlist'] = 'type;[[SLICK_PALETTE_PRESETCONFIG]]';
 
 /**
  * Back end modules
@@ -59,13 +59,13 @@ array_insert($GLOBALS['TL_CTE'], 3, array(
 	'slick' => array(
 		'slick-slider'          => 'HeimrichHannot\Slick\ContentSlick',
 		'slick-content-start'   => 'HeimrichHannot\Slick\ContentSlickContentStart',
-		'slick-slide-separator' => 'HeimrichHannot\Slick\ContentSlickSlide',
-		'slick-slide-start'     => 'HeimrichHannot\Slick\ContentSlickSlideStart',
-		'slick-slide-stop'      => 'HeimrichHannot\Slick\ContentSlickSlideStop',
+		'slick-slide-separator' => 'HeimrichHannot\Slick\ContentSlickSlideSeparator',
+//		'slick-slide-start'     => 'HeimrichHannot\Slick\ContentSlickSlideStart',
+//		'slick-slide-stop'      => 'HeimrichHannot\Slick\ContentSlickSlideStop',
 		'slick-content-stop'    => 'HeimrichHannot\Slick\ContentSlickContentStop',
-		'slick-nav-start'       => 'HeimrichHannot\Slick\ContentSlickNavStart',
-		'slick-nav-separator'   => 'HeimrichHannot\Slick\ContentSlickNavSlide',
-		'slick-nav-stop'        => 'HeimrichHannot\Slick\ContentSlickNavStop',
+//		'slick-nav-start'       => 'HeimrichHannot\Slick\ContentSlickNavStart',
+//		'slick-nav-separator'   => 'HeimrichHannot\Slick\ContentSlickNavSlideSeparator',
+//		'slick-nav-stop'        => 'HeimrichHannot\Slick\ContentSlickNavStop',
 	)
 ));
 

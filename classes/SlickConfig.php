@@ -76,7 +76,8 @@ class SlickConfig extends \Controller
 				$value = deserialize($value, true);
 			}
 
-			if($value == '') continue;
+			// check type as well, otherwise
+			if($value === '') continue;
 			
 			if($key == 'slick_responsive')
 			{

@@ -8,4 +8,8 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-$GLOBALS['TL_LANG']['FMD']['slick_newslist'] = array('Nachrichtenliste als Slick-Karussell', 'Mit diesem Modul wir die Nachrichtenliste in einem Slick-Karussell ausgegeben.');
+/**
+ * Modules
+ */
+$GLOBALS['TL_LANG']['FMD']['slick'] = 'Slick-Slider';
+$GLOBALS['TL_LANG']['FMD']['slick_newslist'] = array('Nachrichtenliste als Slick-Karussell', 'Mit diesem Modul wird die Nachrichtenliste in einem Slick-Karussell ausgegeben.');

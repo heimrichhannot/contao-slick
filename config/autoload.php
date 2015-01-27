@@ -26,26 +26,27 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Models
-	'HeimrichHannot\Slick\SlickConfigModel'                     => 'system/modules/slick/models/SlickConfigModel.php',
+	'HeimrichHannot\Slick\SlickConfigModel'           => 'system/modules/slick/models/SlickConfigModel.php',
 
 	// Modules
-	'HeimrichHannot\Slick\ModuleSlickNewsList'                  => 'system/modules/slick/modules/ModuleSlickNewsList.php',
+	'HeimrichHannot\Slick\ModuleSlickNewsList'        => 'system/modules/slick/modules/ModuleSlickNewsList.php',
 
 	// Elements
-	'HeimrichHannot\OwlCarousel\ContentOwlCarouselSlideStop'    => 'system/modules/slick/elements/ContentOwlCarouselSlideStop.php',
-	'HeimrichHannot\OwlCarousel\ContentOwlCarouselContentStart' => 'system/modules/slick/elements/ContentOwlCarouselContentStart.php',
-	'HeimrichHannot\OwlCarousel\ContentOwlCarouselNavStop'      => 'system/modules/slick/elements/ContentOwlCarouselNavStop.php',
-	'HeimrichHannot\OwlCarousel\ContentOwlCarousel'             => 'system/modules/slick/elements/ContentOwlCarousel.php',
-	'HeimrichHannot\OwlCarousel\ContentOwlCarouselNavStart'     => 'system/modules/slick/elements/ContentOwlCarouselNavStart.php',
-	'HeimrichHannot\OwlCarousel\ContentOwlCarouselSlideStart'   => 'system/modules/slick/elements/ContentOwlCarouselSlideStart.php',
-	'HeimrichHannot\OwlCarousel\ContentOwlCarouselContentStop'  => 'system/modules/slick/elements/ContentOwlCarouselContentStop.php',
+	'HeimrichHannot\Slick\ContentSlick'               => 'system/modules/slick/elements/ContentSlick.php',
+	'HeimrichHannot\Slick\ContentSlickContentStart'   => 'system/modules/slick/elements/ContentSlickContentStart.php',
+	'HeimrichHannot\Slick\ContentSlickNavStop'        => 'system/modules/slick/elements/ContentSlickNavStop.php',
+	'HeimrichHannot\Slick\ContentSlickNavStart'       => 'system/modules/slick/elements/ContentSlickNavStart.php',
+	'HeimrichHannot\Slick\ContentSlickContentStop'    => 'system/modules/slick/elements/ContentSlickContentStop.php',
+	'HeimrichHannot\Slick\ContentSlickSlideSeparator' => 'system/modules/slick/elements/ContentSlickSlideSeparator.php',
+	'HeimrichHannot\Slick\ContentSlickSlideStop'      => 'system/modules/slick/elements/ContentSlickSlideStop.php',
+	'HeimrichHannot\Slick\ContentSlickSlideStart'     => 'system/modules/slick/elements/ContentSlickSlideStart.php',
 
 	// Classes
-	'HeimrichHannot\Slick\Slick'                                => 'system/modules/slick/classes/Slick.php',
-	'HeimrichHannot\Slick\Constants'                            => 'system/modules/slick/classes/Constants.php',
-	'HeimrichHannot\Slick\Hooks'                                => 'system/modules/slick/classes/Hooks.php',
-	'HeimrichHannot\OwlCarousel\SlickUpdater'                   => 'system/modules/slick/classes/SlickUpdater.php',
-	'HeimrichHannot\Slick\SlickConfig'                          => 'system/modules/slick/classes/SlickConfig.php',
+	'HeimrichHannot\Slick\Slick'                      => 'system/modules/slick/classes/Slick.php',
+	'HeimrichHannot\Slick\Constants'                  => 'system/modules/slick/classes/Constants.php',
+	'HeimrichHannot\Slick\Hooks'                      => 'system/modules/slick/classes/Hooks.php',
+	'HeimrichHannot\OwlCarousel\SlickUpdater'         => 'system/modules/slick/classes/SlickUpdater.php',
+	'HeimrichHannot\Slick\SlickConfig'                => 'system/modules/slick/classes/SlickConfig.php',
 ));
 
 
@@ -54,16 +55,17 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'jquery.slick'           => 'system/modules/slick/templates/jquery',
-	'news_full'              => 'system/modules/slick/templates/news',
-	'mod_newslist'           => 'system/modules/slick/templates/modules',
-	'slick_default'          => 'system/modules/slick/templates/gallery',
-	'ce_slick_slide_stop'    => 'system/modules/slick/templates/elements',
-	'ce_slick_nav_stop'      => 'system/modules/slick/templates/elements',
-	'ce_slick_slide_start'   => 'system/modules/slick/templates/elements',
-	'ce_slick_nav_start'     => 'system/modules/slick/templates/elements',
-	'ce_slick_content_start' => 'system/modules/slick/templates/elements',
-	'ce_slick'               => 'system/modules/slick/templates/elements',
-	'ce_slick_content_stop'  => 'system/modules/slick/templates/elements',
-	'block_slick'            => 'system/modules/slick/templates/block',
+	'jquery.slick'             => 'system/modules/slick/templates/jquery',
+	'news_full'                => 'system/modules/slick/templates/news',
+	'mod_newslist'             => 'system/modules/slick/templates/modules',
+	'slick_default'            => 'system/modules/slick/templates/gallery',
+	'ce_slick_slide_stop'      => 'system/modules/slick/templates/elements',
+	'ce_slick_slide_separator' => 'system/modules/slick/templates/elements',
+	'ce_slick_nav_stop'        => 'system/modules/slick/templates/elements',
+	'ce_slick_slide_start'     => 'system/modules/slick/templates/elements',
+	'ce_slick_nav_start'       => 'system/modules/slick/templates/elements',
+	'ce_slick_content_start'   => 'system/modules/slick/templates/elements',
+	'ce_slick'                 => 'system/modules/slick/templates/elements',
+	'ce_slick_content_stop'    => 'system/modules/slick/templates/elements',
+	'block_slick'              => 'system/modules/slick/templates/block',
 ));
