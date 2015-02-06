@@ -15,42 +15,68 @@ class SlickConfig extends \Controller
 	public static function createConfigJs($objConfig, $debug=true)
 	{
 		$objT = new \FrontendTemplate('jquery.slick');
-		
-		$objT->config = rtrim(ltrim(json_encode(static::createConfig($objConfig)), '{'), '}');
+
+		$objT->config = static::createConfigJSON($objConfig);
 		$objT->cssClass = static::getCssClassFromModel($objConfig);
-		
+
 		$strFile = 'assets/js/' . $objT->cssClass . '.js';
-		
+
 		$objFile = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
-		
+
 		// simple file caching
 		if($objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || $debug)
 		{
 			$objFile->write($objT->parse());
 			$objFile->close();
 		}
-		
-		$GLOBALS['TL_JAVASCRIPT']['slick_' . $objT->cssClass] = $strFile;
+
+		$GLOBALS['TL_JAVASCRIPT']['slick_' . $objT->cssClass] = $strFile . (!$debug ? '|static' : '');
 	}
 
 	public static function getCssClassForContent($id)
 	{
 		return 'slick-content-'.  $id;
 	}
-	
+
 	public static function getCssClassFromModel($objConfig)
 	{
 		$strClass = static::stripNamespaceFromClassName($objConfig);
 
 		return 'slick_' . substr(md5($strClass .'_'. $objConfig->id), 0, 6);
 	}
-	
+
+	public static function createConfigJSON($objConfig)
+	{
+		$arrConfig = static::createConfig($objConfig);
+
+		$strJson = '';
+
+		if(!is_array($arrConfig['config'])) return $strJson;
+
+		$strJson = json_encode($arrConfig['config']);
+
+		if(is_array($arrConfig['objects']))
+		{
+			foreach ($arrConfig['objects'] as $key)
+			{
+				// remove quotes from callbacks
+				$strJson = preg_replace('#"' . $key . '":"(.+?)"#', '"' . $key . '":$1', $strJson);
+			}
+		}
+
+		$strJson = ltrim($strJson, '{');
+		$strJson = rtrim($strJson, '}');
+		
+		return $strJson;
+	}
+
 	public static function createConfig($objConfig)
 	{
 		\Controller::loadDataContainer('tl_slick_spread');
-		
+
 		$arrConfig = array();
-		
+		$arrObjects = array();
+
 		foreach($objConfig->row() as $key => $value)
 		{
 			if(strstr($key, 'slick_') === false) continue;
@@ -60,29 +86,34 @@ class SlickConfig extends \Controller
 			$arrData = $GLOBALS['TL_DCA']['tl_slick_spread']['fields'][$key];
 
 			$slickKey = substr($key, 6); // trim slick_ prefix
-			
+
 			if($arrData['eval']['rgxp'] == 'digit')
 			{
 				$value = intval($value);
 			}
-			
+
 			if($arrData['inputType'] == 'checkbox' && !$arrData['eval']['multiple'])
 			{
 				$value = (bool) filter_var($value, FILTER_VALIDATE_BOOLEAN);
 			}
-			
+
 			if($arrData['eval']['multiple'] || $arrData['inputType'] == 'multiColumnWizard')
 			{
 				$value = deserialize($value, true);
 			}
 
+			if($arrData['eval']['isJsObject'])
+			{
+				$arrObjects[] = $slickKey;
+			}
+
 			// check type as well, otherwise
 			if($value === '') continue;
-			
+
 			if($key == 'slick_responsive')
 			{
 				$arrResponsive = array();
-				
+
 				foreach($value as $config)
 				{
 					if(empty($config['slick_settings'])) continue;
@@ -91,21 +122,31 @@ class SlickConfig extends \Controller
 
 					if($objResponsiveConfig === null) continue;
 
-					$config['slick_settings'] = static::createConfig($objResponsiveConfig);
+					$config['breakpoint'] = $config['slick_breakpoint'];
+					unset($config['slick_breakpoint']);
 
-					// trim slick_ prefix
-					array_walk($config, function (&$value, $key) use (&$config) {
-						$config[substr($key, 6)] = $value;
-					});
+					$settings = static::createConfig($objResponsiveConfig);
+
+					if($settings['config']['unslick'])
+					{
+						$config['settings'] = 'unslick';
+					}
+					else
+					{
+						$config['settings'] = $settings['config'];
+					}
+
+					unset($config['slick_settings']);
+
 
 					$arrResponsive[] = $config;
 				}
-				
+
 				if(empty($arrResponsive))
 				{
 					$value = false;
 				}
-				else 
+				else
 				{
 					$value = $arrResponsive;
 				}
@@ -113,24 +154,30 @@ class SlickConfig extends \Controller
 
 			$arrConfig[$slickKey] = $value;
 		}
-		
+
 		// remove responsive settings, otherwise center wont work
 		if(empty($arrResponsive))
 		{
 			unset($arrConfig['responsive']);
 		}
 
-		return $arrConfig;
+		$arrReturn = array
+		(
+			'config' 	=> $arrConfig,
+			'objects'	=> $arrObjects
+		);
+
+		return $arrReturn;
 	}
-	
+
 	public static function stripNamespaceFromClassName($obj)
 	{
 		$classname = get_class($obj);
-	
+
 		if (preg_match('@\\\\([\w]+)$@', $classname, $matches)) {
 			$classname = $matches[1];
 		}
-	
+
 		return $classname;
 	}
 }

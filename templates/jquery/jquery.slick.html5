@@ -1,53 +1,7 @@
 (function($){
 	$(document).ready(function(){
 		var slick = $('.<?php echo $this->cssClass;?>').slick({
-			<?php echo $this->config;?>,
-			onInitialized : function(){
-				// remove data-gallery & data-lightbox for cloned items
-				this.$element.find('.owl-item.cloned a').removeAttr('data-lightbox data-gallery');
-
-				if(this.$element.data('syncid')  === undefined) return false;
-
-				var syncid = this.$element.data('syncid'),
-					$nav = $('[data-syncto="' + syncid + '"]');
-
-				if($nav.length < 1) return false;
-
-				$nav.find('.owl-item').eq(this._current).addClass('owl-active-content');
-			}
+			<?php echo $this->config;?>
 		});
-/*
-
-		owl.on('click', '.owl-item', function(event) {
-			var $carousel = $(this).parents('.owl-carousel');
-
-			if($carousel.data('syncto') === undefined) return true; // click event must work to follow links, not false
-
-			var $target = $('.' + $carousel.data('syncto'));
-
-			if($target.length < 1) return false;
-
-			$target.trigger('to.owl.carousel', [$(event.target).parents('.owl-item').index(), 300, true]);
-		});
-
-		owl.on('change.owl.carousel', function(event) {
-
-			var $this = $(this);
-
-			if($this.data('syncid')  === undefined) return false;
-
-			var syncid = $this.data('syncid'),
-				$nav = $('[data-syncto="' + syncid + '"]');
-
-			if($nav.length < 1) return false;
-
-			if (event.namespace && event.property.name === 'position') {
-				var target = event.relatedTarget.relative(event.property.value, true);
-				$nav.find('.owl-item').removeClass('owl-active-content');
-				$nav.find('.owl-item').eq(target).addClass('owl-active-content');
-			}
-
-		});
-*/
 	});
 })(jQuery);

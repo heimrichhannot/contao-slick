@@ -51,6 +51,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 							slick_infinite,
 							slick_initialSlide,
 							slick_lazyLoad,
+							slick_mobileFirst,
 							slick_pauseOnHover,
 							slick_pauseOnDotsHover,
 							slick_respondTo,
@@ -67,13 +68,14 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 							slick_useCSS,
 							slick_variableWidth,
 							slick_vertical,
-							slick_waitForAnimate
+							slick_waitForAnimate,
+							slick_unslick
 							',
 		'addGallery' => 'slickMultiSRC,slickSortBy,slickUseHomeDir,slickSize,slickFullsize,slickNumberOfItems,slickgalleryTpl,slickCustomTpl',
 	),
 	'fields'      => array
 	(
-		'slickConfig'               => array
+		'slickConfig'            => array
 		(
 			'label'      => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickConfig'],
 			'inputType'  => 'select',
@@ -85,7 +87,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 				array('tl_slick_spread', 'editSlickConfig')
 			),
 		),
-		'addSlick'                  => array
+		'addSlick'               => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['addSlick'],
 			'inputType' => 'checkbox',
@@ -97,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			'sql'       => "char(1) NOT NULL default ''"
 		),
 		// START: Gallery fields
-		'addGallery'                => array
+		'addGallery'             => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['addGallery'],
 			'inputType' => 'checkbox',
@@ -108,15 +110,15 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slickMultiSRC'             => $GLOBALS['TL_DCA']['tl_content']['fields']['multiSRC'],
-		'slickOrderSRC'             => $GLOBALS['TL_DCA']['tl_content']['fields']['orderSRC'],
-		'slickSortBy'               => $GLOBALS['TL_DCA']['tl_content']['fields']['sortBy'],
-		'slickUseHomeDir'           => $GLOBALS['TL_DCA']['tl_content']['fields']['useHomeDir'],
-		'slickSize'                 => $GLOBALS['TL_DCA']['tl_content']['fields']['size'],
-		'slickFullsize'             => $GLOBALS['TL_DCA']['tl_content']['fields']['fullsize'],
-		'slickNumberOfItems'        => $GLOBALS['TL_DCA']['tl_content']['fields']['numberOfItems'],
-		'slickCustomTpl'            => $GLOBALS['TL_DCA']['tl_content']['fields']['customTpl'],
-		'slickgalleryTpl'           => array
+		'slickMultiSRC'          => $GLOBALS['TL_DCA']['tl_content']['fields']['multiSRC'],
+		'slickOrderSRC'          => $GLOBALS['TL_DCA']['tl_content']['fields']['orderSRC'],
+		'slickSortBy'            => $GLOBALS['TL_DCA']['tl_content']['fields']['sortBy'],
+		'slickUseHomeDir'        => $GLOBALS['TL_DCA']['tl_content']['fields']['useHomeDir'],
+		'slickSize'              => $GLOBALS['TL_DCA']['tl_content']['fields']['size'],
+		'slickFullsize'          => $GLOBALS['TL_DCA']['tl_content']['fields']['fullsize'],
+		'slickNumberOfItems'     => $GLOBALS['TL_DCA']['tl_content']['fields']['numberOfItems'],
+		'slickCustomTpl'         => $GLOBALS['TL_DCA']['tl_content']['fields']['customTpl'],
+		'slickgalleryTpl'        => array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['tl_content']['galleryTpl'],
 			'exclude'          => true,
@@ -127,7 +129,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 		),
 		// END: Gallery fields
 		// START: Slick JS defaults / options
-		'slick_accessibility'       => array
+		'slick_accessibility'    => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_accessibility'],
 			'inputType' => 'checkbox',
@@ -139,7 +141,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_adaptiveHeight'      => array
+		'slick_adaptiveHeight'   => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_adaptiveHeight'],
 			'inputType' => 'checkbox',
@@ -152,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 		),
 		//		slick_appendArrows,
 		//		slick_appendDots,
-		'slick_arrows'              => array
+		'slick_arrows'           => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_arrows'],
 			'inputType' => 'checkbox',
@@ -165,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			'sql'       => "char(1) NOT NULL default ''"
 		),
 		//		slick_asNavFor,
-		'slick_prevArrow'           => array
+		'slick_prevArrow'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_prevArrow'],
 			'inputType' => 'text',
@@ -178,7 +180,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_nextArrow'           => array
+		'slick_nextArrow'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_nextArrow'],
 			'inputType' => 'text',
@@ -191,7 +193,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_autoplay'            => array
+		'slick_autoplay'         => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_autoplay'],
 			'inputType' => 'checkbox',
@@ -202,7 +204,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_autoplaySpeed'       => array
+		'slick_autoplaySpeed'    => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_autoplaySpeed'],
 			'inputType' => 'text',
@@ -215,7 +217,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "smallint(5) unsigned NOT NULL default '0'"
 		),
-		'slick_centerMode'          => array
+		'slick_centerMode'       => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_centerMode'],
 			'inputType' => 'checkbox',
@@ -226,7 +228,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_centerPadding'       => array
+		'slick_centerPadding'    => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_centerPadding'],
 			'inputType' => 'text',
@@ -238,7 +240,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_cssEase'             => array
+		'slick_cssEase'          => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_cssEase'],
 			'inputType' => 'text',
@@ -250,8 +252,19 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		//		slick_customPaging,
-		'slick_dots'                => array
+		'slick_customPaging'     => array
+		(
+			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_customPaging'],
+			'inputType' => 'text',
+			'exclude'   => true,
+			'eval'      => array
+			(
+				'tl_class'   => 'long clr',
+				'isJsObject' => true,
+			),
+			'sql'       => "varchar(255) NOT NULL default ''"
+		),
+		'slick_dots'             => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_dots'],
 			'inputType' => 'checkbox',
@@ -262,7 +275,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_dotsClass'           => array
+		'slick_dotsClass'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_dotsClass'],
 			'inputType' => 'text',
@@ -274,7 +287,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_draggable'           => array
+		'slick_draggable'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_draggable'],
 			'inputType' => 'checkbox',
@@ -298,7 +311,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_edgeFriction'       => array
+		'slick_edgeFriction'     => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_edgeFriction'],
 			'inputType' => 'text',
@@ -311,7 +324,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "float(9,2) unsigned NOT NULL default '0.00'"
 		),
-		'slick_fade'       => array
+		'slick_fade'             => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_fade'],
 			'inputType' => 'checkbox',
@@ -322,7 +335,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_focusOnSelect'       => array
+		'slick_focusOnSelect'    => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_focusOnSelect'],
 			'inputType' => 'checkbox',
@@ -333,11 +346,11 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_infinite'       => array
+		'slick_infinite'         => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_infinite'],
 			'inputType' => 'checkbox',
-			'default'	=> true,
+			'default'   => true,
 			'exclude'   => true,
 			'eval'      => array
 			(
@@ -345,7 +358,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_initialSlide'       => array
+		'slick_initialSlide'     => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_initialSlide'],
 			'inputType' => 'text',
@@ -358,12 +371,12 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "smallint(5) unsigned NOT NULL default '0'"
 		),
-		'slick_lazyLoad'           => array
+		'slick_lazyLoad'         => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_lazyLoad'],
 			'inputType' => 'select',
 			'default'   => 'ondemand',
-			'options'	=> array('ondemand', 'progressive'),
+			'options'   => array('ondemand', 'progressive'),
 			'exclude'   => true,
 			'eval'      => array
 			(
@@ -371,11 +384,11 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_pauseOnHover'       => array
+		'slick_mobileFirst'		 => array
 		(
-			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pauseOnHover'],
+			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_mobileFirst'],
 			'inputType' => 'checkbox',
-			'default'	=> true,
+			'default'   => true,
 			'exclude'   => true,
 			'eval'      => array
 			(
@@ -383,7 +396,19 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_pauseOnDotsHover'       => array
+		'slick_pauseOnHover'     => array
+		(
+			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pauseOnHover'],
+			'inputType' => 'checkbox',
+			'default'   => true,
+			'exclude'   => true,
+			'eval'      => array
+			(
+				'tl_class' => 'w50',
+			),
+			'sql'       => "char(1) NOT NULL default ''"
+		),
+		'slick_pauseOnDotsHover' => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pauseOnDotsHover'],
 			'inputType' => 'checkbox',
@@ -394,7 +419,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_respondTo'       => array
+		'slick_respondTo'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_respondTo'],
 			'inputType' => 'text',
@@ -406,7 +431,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_responsive'            => array
+		'slick_responsive'       => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_responsive'],
 			'inputType' => 'multiColumnWizard',
@@ -427,14 +452,14 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 							'rgxp'  => 'digit'
 						)
 					),
-					'slick_settings'     => array
+					'slick_settings'   => array
 					(
-						'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_settings'],
-						'inputType' => 'select',
+						'label'            => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_settings'],
+						'inputType'        => 'select',
 						'options_callback' => array('tl_slick_spread', 'getConfigurations'),
-						'eval'      => array
+						'eval'             => array
 						(
-							'style' => 'width:400px',
+							'style'              => 'width:400px',
 							'includeBlankOption' => true
 						)
 					),
@@ -442,7 +467,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "blob NULL"
 		),
-		'slick_rtl'       => array
+		'slick_rtl'              => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_rtl'],
 			'inputType' => 'checkbox',
@@ -453,7 +478,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_slide'       => array
+		'slick_slide'            => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_slide'],
 			'inputType' => 'text',
@@ -465,7 +490,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_slidesToShow'       => array
+		'slick_slidesToShow'     => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_slidesToShow'],
 			'inputType' => 'text',
@@ -478,7 +503,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "smallint(5) unsigned NOT NULL default '0'"
 		),
-		'slick_slidesToScroll'       => array
+		'slick_slidesToScroll'   => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_slidesToScroll'],
 			'inputType' => 'text',
@@ -491,7 +516,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "smallint(5) unsigned NOT NULL default '0'"
 		),
-		'slick_speed'       => array
+		'slick_speed'            => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_speed'],
 			'inputType' => 'text',
@@ -504,19 +529,19 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "smallint(5) unsigned NOT NULL default '0'"
 		),
-		'slick_swipe'       => array
+		'slick_swipe'            => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_swipe'],
 			'inputType' => 'checkbox',
 			'exclude'   => true,
-			'default'	=> true,
+			'default'   => true,
 			'eval'      => array
 			(
 				'tl_class' => 'w50 clr',
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_swipeToSlide'       => array
+		'slick_swipeToSlide'     => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_swipeToSlide'],
 			'inputType' => 'checkbox',
@@ -527,19 +552,19 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_touchMove'       => array
+		'slick_touchMove'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_touchMove'],
 			'inputType' => 'checkbox',
 			'exclude'   => true,
-			'default'	=> true,
+			'default'   => true,
 			'eval'      => array
 			(
 				'tl_class' => 'clr w50',
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_touchThreshold'       => array
+		'slick_touchThreshold'   => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_touchThreshold'],
 			'inputType' => 'text',
@@ -552,19 +577,19 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "smallint(5) unsigned NOT NULL default '0'"
 		),
-		'slick_useCSS'       => array
+		'slick_useCSS'           => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_useCSS'],
 			'inputType' => 'checkbox',
 			'exclude'   => true,
-			'default'	=> true,
+			'default'   => true,
 			'eval'      => array
 			(
 				'tl_class' => 'clr w50',
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_variableWidth'       => array
+		'slick_variableWidth'    => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_variableWidth'],
 			'inputType' => 'checkbox',
@@ -575,7 +600,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_vertical'       => array
+		'slick_vertical'         => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_vertical'],
 			'inputType' => 'checkbox',
@@ -586,18 +611,31 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_waitForAnimate'       => array
+		'slick_waitForAnimate'   => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_waitForAnimate'],
 			'inputType' => 'checkbox',
 			'exclude'   => true,
-			'default'	=> true,
+			'default'   => true,
 			'eval'      => array
 			(
 				'tl_class' => 'w50',
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
+		'slick_unslick'          => array
+		(
+			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_unslick'],
+			'inputType' => 'checkbox',
+			'exclude'   => true,
+			'default'   => true,
+			'eval'      => array
+			(
+				'tl_class'   => 'w50',
+				'isJsObject' => true
+			),
+			'sql'       => "char(1) NOT NULL default ''"
+		)
 		// END: Slick JS defaults / options
 	)
 );
@@ -648,10 +686,9 @@ class tl_slick_spread extends \Backend
 
 		$objConfig = \HeimrichHannot\Slick\SlickConfigModel::findBy(array('id != ?'), $objWidget->activeRecord->id);
 
-		if($objConfig === null) return $arrOptions;
+		if ($objConfig === null) return $arrOptions;
 
-		while($objConfig->next())
-		{
+		while ($objConfig->next()) {
 			$arrOptions[$objConfig->id] = $objConfig->title;
 		}
 

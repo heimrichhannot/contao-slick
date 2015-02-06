@@ -43,7 +43,7 @@ if (TL_MODE == 'FE') {
 	/**
 	 * CSS
 	 */
-	$GLOBALS['TL_USER_CSS']['slick'] = 'system/modules/slick/assets/vendor/slick/slick/slick.css|screen|static|1.3.15';
+	$GLOBALS['TL_USER_CSS']['slick'] = 'system/modules/slick/assets/vendor/slick/slick/slick.css|screen|static|1.4.0';
 
 
 	/**
