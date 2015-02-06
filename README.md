@@ -1,6 +1,6 @@
 # Slick
 
-A content slider/carousel for contao based on [http://kenwheeler.github.io/slick/](kenwheelers slick carousel).
+A content slider/carousel for contao based on [kenwheelers slick carousel](http://kenwheeler.github.io/slick/).
 
 ## Features
 
