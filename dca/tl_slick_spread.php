@@ -628,7 +628,6 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_unslick'],
 			'inputType' => 'checkbox',
 			'exclude'   => true,
-			'default'   => true,
 			'eval'      => array
 			(
 				'tl_class'   => 'w50',
