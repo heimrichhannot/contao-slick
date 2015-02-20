@@ -37,7 +37,7 @@ class ContentSlickContentStart extends \ContentElement
 
 		SlickConfig::createConfigJs($objConfig);
 
-		$this->Template->class .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' owl-carousel ' . SlickConfig::getCssClassForContent($this->id);
+		$this->Template->class .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick ' . SlickConfig::getCssClassForContent($this->id);
 		$this->Template->syncid = SlickConfig::getCssClassForContent($this->id);
 
 		return $this->Template->parse();

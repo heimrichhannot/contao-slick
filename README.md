@@ -8,4 +8,3 @@ A content slider/carousel for contao based on [kenwheelers slick carousel](http:
 - supports newslists
 - supports content elements
 - responsive
-

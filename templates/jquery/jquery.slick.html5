@@ -1,7 +1,19 @@
 (function($){
 	$(document).ready(function(){
+
+		// binding events before initializing slick
+
+		$('.<?php echo $this->cssClass;?>').on('init', function(event, slick){
+
+			// unslick if not enough slides
+			if(slick.$slides.length <= 1){
+				slick.unslick();
+			}
+		});
+
 		var slick = $('.<?php echo $this->cssClass;?>').slick({
 			<?php echo $this->config;?>
 		});
+
 	});
 })(jQuery);
