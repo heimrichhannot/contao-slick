@@ -32,7 +32,7 @@ class ContentSlick extends \ContentGallery
 
 		parent::generate();
 
-		$objConfig = SlickConfig::findByPk($this->slickConfig);
+		$objConfig = SlickConfigModel::findByPk($this->slickConfig);
 
 		if ($objConfig === null) return;
 

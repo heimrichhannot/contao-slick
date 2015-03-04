@@ -55,6 +55,8 @@ class Slick extends \Frontend
 		$auxDate = array();
 		$objFiles = $this->objFiles;
 
+		if($objFiles === null) return '';
+
 		// Get all images
 		while ($objFiles->next())
 		{
@@ -304,7 +306,7 @@ class Slick extends \Frontend
 
 		foreach($arrData as $key => $value)
 		{
-			if(substr($key, 0, 3) != 'slick') continue;
+			if(substr($key, 0, 5) != 'slick') continue;
 
 			$arrData = &$GLOBALS['TL_DCA']['tl_slick_spread']['fields'][$key];
 

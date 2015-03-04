@@ -12,7 +12,7 @@ namespace HeimrichHannot\Slick;
 
 class SlickConfig extends \Controller
 {
-	public static function createConfigJs($objConfig, $debug=false)
+	public static function createConfigJs($objConfig, $debug=true)
 	{
 		$objT = new \FrontendTemplate('jquery.slick');
 

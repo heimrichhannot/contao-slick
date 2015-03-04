@@ -15,7 +15,7 @@ $GLOBALS['TL_SLICK']['SUPPORTED']['tl_news_archive']['default']  = 'jumpTo;[[SLI
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_news']['default']          = 'addImage;[[SLICK_PALETTE_GALLERY]]';
 
 // Content support
-$GLOBALS['TL_SLICK']['SUPPORTED']['tl_content']['slick']               = '[[SLICK_PALETTE_CONTENT]]';
+$GLOBALS['TL_SLICK']['SUPPORTED']['tl_content']['slick-slider']               = '[[SLICK_PALETTE_CONTENT]]';
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_content']['slick-content-start'] = '[[SLICK_PALETTE_CONTENT_SLIDER_START]]';
 
 // Owl carousel config support
