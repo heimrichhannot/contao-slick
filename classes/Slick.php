@@ -173,7 +173,7 @@ class Slick extends \Frontend
 			case 'custom':
 				if ($this->slickOrderSRC != '')
 				{
-					$tmp = deserialize($this->owlOrderSRC);
+					$tmp = deserialize($this->slickOrderSRC);
 
 					if (!empty($tmp) && is_array($tmp))
 					{
@@ -227,9 +227,9 @@ class Slick extends \Frontend
 		$strTemplate = 'slick_default';
 
 		// Use a custom template
-		if (TL_MODE == 'FE' && $this->owlGalleryTpl != '')
+		if (TL_MODE == 'FE' && $this->slickgalleryTpl != '')
 		{
-			$strTemplate = $this->owlGalleryTpl;
+			$strTemplate = $this->slickgalleryTpl;
 		}
 
 		SlickConfig::createConfigJs($this->objSettings, true);
