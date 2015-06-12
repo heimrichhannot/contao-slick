@@ -43,13 +43,13 @@ if (TL_MODE == 'FE') {
 	/**
 	 * CSS
 	 */
-	$GLOBALS['TL_USER_CSS']['slick'] = 'system/modules/slick/assets/vendor/slick/slick/slick.css|screen|static|1.4.0';
+	$GLOBALS['TL_USER_CSS']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.css|screen|static|1.4.0';
 
 
 	/**
 	 * Javascript
 	 */
-	$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick/slick/slick.js|static';
+	$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.js|static';
 }
 
 /**
