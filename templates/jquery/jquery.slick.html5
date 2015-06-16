@@ -3,7 +3,7 @@
 
 		// binding events before initializing slick
 
-		$('.<?php echo $this->cssClass;?>').on('init', function(event, slick){
+		$('.<?php echo $this->cssClass;?> .slick-container').on('init', function(event, slick){
 
 			// unslick if not enough slides
 			if(slick.$slides.length <= 1){
@@ -11,7 +11,7 @@
 			}
 		});
 
-		var slick = $('.<?php echo $this->cssClass;?>').slick({
+		var slick = $('.<?php echo $this->cssClass;?> .slick-container').slick({
 			<?php echo $this->config;?>
 		});
 
