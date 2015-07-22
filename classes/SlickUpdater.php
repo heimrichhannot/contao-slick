@@ -8,7 +8,7 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-namespace HeimrichHannot\OwlCarousel;
+namespace HeimrichHannot\Slick;
 
 
 class SlickUpdater

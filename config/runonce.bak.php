@@ -8,7 +8,7 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-class OwlRunOnce extends Controller
+class SlickRunOnce extends Controller
 {
 	public function __construct()
 	{
@@ -17,12 +17,12 @@ class OwlRunOnce extends Controller
 
 	public function run()
 	{
-		if(class_exists('\\HeimrichHannot\\OwlCarousel\\OwlUpdater'))
+		if(class_exists('\\HeimrichHannot\\Slick\\SlickUpdater'))
 		{
-			\HeimrichHannot\OwlCarousel\OwlUpdater::run();
+			\HeimrichHannot\Slick\SlickUpdater::run();
 		}
 	}
 }
 
-$objRunOnce = new OwlRunOnce();
+$objRunOnce = new SlickRunOnce();
 $objRunOnce->run();

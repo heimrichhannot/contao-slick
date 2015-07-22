@@ -5,9 +5,7 @@
  *
  * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Slick
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -45,7 +43,7 @@ ClassLoader::addClasses(array
 	'HeimrichHannot\Slick\Slick'                      => 'system/modules/slick/classes/Slick.php',
 	'HeimrichHannot\Slick\Constants'                  => 'system/modules/slick/classes/Constants.php',
 	'HeimrichHannot\Slick\Hooks'                      => 'system/modules/slick/classes/Hooks.php',
-	'HeimrichHannot\OwlCarousel\SlickUpdater'         => 'system/modules/slick/classes/SlickUpdater.php',
+	'HeimrichHannot\Slick\SlickUpdater'               => 'system/modules/slick/classes/SlickUpdater.php',
 	'HeimrichHannot\Slick\SlickConfig'                => 'system/modules/slick/classes/SlickConfig.php',
 ));
 
@@ -59,10 +57,9 @@ TemplateLoader::addFiles(array
 	'news_full'                => 'system/modules/slick/templates/news',
 	'mod_newslist'             => 'system/modules/slick/templates/modules',
 	'slick_default'            => 'system/modules/slick/templates/gallery',
-	'ce_slick_slide_stop'      => 'system/modules/slick/templates/elements',
 	'ce_slick_slide_separator' => 'system/modules/slick/templates/elements',
 	'ce_slick_nav_stop'        => 'system/modules/slick/templates/elements',
-	'ce_slick_slide_start'     => 'system/modules/slick/templates/elements',
+	'ce_slick_nav_separator'   => 'system/modules/slick/templates/elements',
 	'ce_slick_nav_start'       => 'system/modules/slick/templates/elements',
 	'ce_slick_content_start'   => 'system/modules/slick/templates/elements',
 	'ce_slick'                 => 'system/modules/slick/templates/elements',
