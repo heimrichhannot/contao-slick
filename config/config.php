@@ -39,7 +39,8 @@ array_insert($GLOBALS['BE_MOD']['system'], 1, array(
  */
 $GLOBALS['FE_MOD']['news']['slick_newslist'] = '\HeimrichHannot\Slick\ModuleSlickNewsList';
 
-if (TL_MODE == 'FE' && \HeimrichHannot\Slick\SlickConfig::isJQueryEnabled()) {
+if (TL_MODE == 'FE')
+{
 	/**
 	 * CSS
 	 */
