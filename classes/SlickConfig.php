@@ -12,7 +12,7 @@ namespace HeimrichHannot\Slick;
 
 class SlickConfig extends \Controller
 {
-	public static function createConfigJs($objConfig, $debug=true)
+	public static function createConfigJs($objConfig, $debug=false)
 	{
 		if(!static::isJQueryEnabled()) return false;
 
