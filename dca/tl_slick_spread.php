@@ -170,7 +170,18 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		//		slick_asNavFor,
+		'slick_asNavFor'         => array
+		(
+			'label'            => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_asNavFor'],
+			'inputType'        => 'select',
+			'options_callback' => array('tl_slick_spread', 'getConfigurations'),
+			'eval'             => array
+			(
+				'includeBlankOption' => true,
+				'tl_class'           => 'w50',
+			),
+			'sql'              => "int(10) unsigned NOT NULL"
+		),
 		'slick_prevArrow'        => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_prevArrow'],
@@ -388,7 +399,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "varchar(255) NOT NULL default ''"
 		),
-		'slick_mobileFirst'		 => array
+		'slick_mobileFirst'      => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_mobileFirst'],
 			'inputType' => 'checkbox',
@@ -471,7 +482,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "blob NULL"
 		),
-		'slick_rows'     => array
+		'slick_rows'             => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_rows'],
 			'inputType' => 'text',
@@ -641,7 +652,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_verticalSwiping'         => array
+		'slick_verticalSwiping'  => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_verticalSwiping'],
 			'inputType' => 'checkbox',
@@ -664,7 +675,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''"
 		),
-		'slick_zIndex'   => array
+		'slick_zIndex'           => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_zIndex'],
 			'inputType' => 'text',
@@ -699,7 +710,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread']['palettes'][SLICK_PALETTE_FLAT] = str_repl
 
 // Gallery Support -- not tl_content type present, set isGallery as default for multiSRC
 $GLOBALS['TL_DCA']['tl_slick_spread']['fields']['slickMultiSRC']['eval']['orderField'] = 'slickOrderSRC';
-$GLOBALS['TL_DCA']['tl_slick_spread']['fields']['slickMultiSRC']['eval']['isGallery']  = true;
+$GLOBALS['TL_DCA']['tl_slick_spread']['fields']['slickMultiSRC']['eval']['isGallery'] = true;
 
 // Content Support -- set isGallery by type
 $GLOBALS['TL_DCA']['tl_content']['fields']['multiSRC']['load_callback'][] = array('tl_slick_spread', 'setFileTreeFlags');
@@ -733,11 +744,11 @@ class tl_slick_spread extends \Backend
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=slick_config&amp;act=edit&amp;id=' . $dc->value . '&amp;popup=1&amp;nb=1&amp;rt=' . REQUEST_TOKEN . '" title="' . sprintf(specialchars($GLOBALS['TL_LANG']['tl_slick_spread']['editSlickConfig'][1]), $dc->value) . '" style="padding-left:3px" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_slick_spread']['editSlickConfig'][1], $dc->value))) . '\',\'url\':this.href});return false">' . Image::getHtml('alias.gif', $GLOBALS['TL_LANG']['tl_slick_spread']['editSlickConfig'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
-	public function getConfigurations(\Widget $objWidget)
+	public function getConfigurations($dc)
 	{
 		$arrOptions = array();
 
-		$objConfig = \HeimrichHannot\Slick\SlickConfigModel::findBy(array('id != ?'), $objWidget->activeRecord->id);
+		$objConfig = \HeimrichHannot\Slick\SlickConfigModel::findBy(array('id != ?'), $dc->activeRecord->id);
 
 		if ($objConfig === null) return $arrOptions;
 

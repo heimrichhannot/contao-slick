@@ -12,7 +12,7 @@ namespace HeimrichHannot\Slick;
 
 class SlickConfig extends \Controller
 {
-	public static function createConfigJs($objConfig, $debug=false)
+	public static function createConfigJs($objConfig, $debug=true)
 	{
 		if(!static::isJQueryEnabled()) return false;
 
@@ -57,7 +57,7 @@ class SlickConfig extends \Controller
 	{
 		$strClass = static::stripNamespaceFromClassName($objConfig);
 
-		return 'slick_' . substr(md5($strClass .'_'. $objConfig->id), 0, 6);
+		return 'slick_' . substr(md5($strClass .'_'. $objConfig->id), 0, 6) . ' .slick-container';
 	}
 
 	public static function createConfigJSON($objConfig)
@@ -164,6 +164,16 @@ class SlickConfig extends \Controller
 				else
 				{
 					$value = $arrResponsive;
+				}
+			}
+
+			if($key == 'slick_asNavFor')
+			{
+				$objTargetConfig = SlickConfigModel::findByPk($value);
+
+				if($objTargetConfig !== null)
+				{
+					$value = '.' . static::getCssClassFromModel($objTargetConfig);
 				}
 			}
 
