@@ -39,17 +39,11 @@ array_insert($GLOBALS['BE_MOD']['system'], 1, array(
  */
 $GLOBALS['FE_MOD']['news']['slick_newslist'] = '\HeimrichHannot\Slick\ModuleSlickNewsList';
 
-if (TL_MODE == 'FE') {
+if (TL_MODE == 'FE' && \HeimrichHannot\Slick\SlickConfig::isJQueryEnabled()) {
 	/**
 	 * CSS
 	 */
 	$GLOBALS['TL_USER_CSS']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.css|screen|static|1.4.0';
-
-
-	/**
-	 * Javascript
-	 */
-	$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.js|static';
 }
 
 /**

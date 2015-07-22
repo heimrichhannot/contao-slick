@@ -14,6 +14,8 @@ class SlickConfig extends \Controller
 {
 	public static function createConfigJs($objConfig, $debug=false)
 	{
+		if(!static::isJQueryEnabled()) return false;
+
 		$objT = new \FrontendTemplate('jquery.slick');
 
 		$objT->config = static::createConfigJSON($objConfig);
@@ -30,7 +32,20 @@ class SlickConfig extends \Controller
 			$objFile->close();
 		}
 
-		$GLOBALS['TL_JAVASCRIPT']['slick_' . $objT->cssClass] = $strFile . (!$debug ? '|static' : '');
+		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.js|static';
+		$GLOBALS['TL_JAVASCRIPT'][$objT->cssClass] = $strFile . (!$debug ? '|static' : '');
+	}
+
+	public static function isJQueryEnabled()
+	{
+		global $objPage;
+
+		$blnMobile = ($objPage->mobileLayout && \Environment::get('agent')->mobile);
+
+		$intId = ($blnMobile && $objPage->mobileLayout) ? $objPage->mobileLayout : $objPage->layout;
+		$objLayout = \LayoutModel::findByPk($intId);
+
+		return $objLayout->addJQuery;
 	}
 
 	public static function getCssClassForContent($id)

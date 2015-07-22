@@ -10,6 +10,10 @@
 
 $dc = &$GLOBALS['TL_DCA']['tl_content'];
 
+
+/**
+ * Palettes
+ */
 $dc['palettes']['slick-content-start'] = '{type_legend},type,headline;{slick_config},slickConfig;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $dc['palettes']['slick-content-stop']  = '{type_legend},type,headline;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop';
 
