@@ -14,7 +14,7 @@
 $GLOBALS['TL_LANG']['tl_slick_spread']['slickConfig'] = array('Slick-Karussell Konfiguration', 'Wählen Sie aus der Liste eine Slick-Karussell Konfiguration aus.');
 $GLOBALS['TL_LANG']['tl_slick_spread']['addSlick'] = array('Slick-Karussell hinzufügen', 'Slick-Karussell Unterstützung aktivieren');
 $GLOBALS['TL_LANG']['tl_slick_spread']['addGallery'] = array('Galerie hinzufügen', 'Eine Bildergalerie erzeugen.');
-
+$GLOBALS['TL_LANG']['tl_slick_spread']['cssClass'] = array('CSS-Klasse', 'Hier können Sie CSS-Klassen, durch Leerzeichen getrennt hinterlegen, die dem Slick-Karussell Elternelement hinzugefügt werden.');
 
 
 

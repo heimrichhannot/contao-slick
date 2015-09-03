@@ -1,11 +1,16 @@
 (function($){
 	$(document).ready(function(){
-		var slick  = $('.<?php echo $this->cssClass;?>');
+		var slick = $('<?= $this->selector;?>');
+
+		<?php if($this->initCallback) : ?>
+			// init callback must be triggered befor slick carousel is created (see #1005)
+			if (typeof <?= $this->initCallback; ?> == 'function') <?= $this->initCallback; ?> (slick);
+		<?php endif; ?>
 
 		// initialize slick, if more than one slide
 		if(slick.children().length > 1){
-			var slick = $('.<?php echo $this->cssClass;?>').slick({
-				<?php echo $this->config;?>
+			var slick = $('<?= $this->selector;?>').slick({
+				<?= $this->config;?>
 			});
 		}
 	});

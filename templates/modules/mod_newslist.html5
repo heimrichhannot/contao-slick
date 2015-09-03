@@ -1,4 +1,4 @@
-<?php $this->extend('block_slick'); ?>
+<?php $this->extend($this->type == 'slick_newslist' ? 'block_slick' : 'block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
 

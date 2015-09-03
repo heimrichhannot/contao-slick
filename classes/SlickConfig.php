@@ -12,16 +12,24 @@ namespace HeimrichHannot\Slick;
 
 class SlickConfig extends \Controller
 {
-	public static function createConfigJs($objConfig, $debug=false)
+	public static function createConfigJs($objConfig, $debug = false)
 	{
 		if(!static::isJQueryEnabled()) return false;
+
+		$cache = !$GLOBALS['TL_CONFIG']['bypassCache'];
 
 		$objT = new \FrontendTemplate('jquery.slick');
 
 		$objT->config = static::createConfigJSON($objConfig);
-		$objT->cssClass = static::getCssClassFromModel($objConfig);
+		$objT->selector = static::getSlickContainerSelectorFromModel($objConfig);
+		$objT->wrapperClass = static::getSlickCssClassFromModel($objConfig);
 
-		$strFile = 'assets/js/' . $objT->cssClass . '.js';
+		if($objConfig->initCallback)
+		{
+			$objT->initCallback = $objConfig->initCallback;
+		}
+
+		$strFile = 'assets/js/' . $objT->wrapperClass . '.js';
 
 		$objFile = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
 
@@ -32,8 +40,8 @@ class SlickConfig extends \Controller
 			$objFile->close();
 		}
 
-		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.js|static';
-		$GLOBALS['TL_JAVASCRIPT'][$objT->cssClass] = $strFile . (!$debug ? '|static' : '');
+		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.js'  . ($cache ? '|static' : '');
+		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $strFile . ($cache ? '|static' : '');
 	}
 
 	public static function isJQueryEnabled()
@@ -53,12 +61,23 @@ class SlickConfig extends \Controller
 		return 'slick-content-'.  $id;
 	}
 
-	public static function getCssClassFromModel($objConfig)
+	public static function getSlickContainerSelectorFromModel($objConfig)
+	{
+		return '.' . static::getSlickCssClassFromModel($objConfig) . ' .slick-container';
+	}
+
+	public static function getSlickCssClassFromModel($objConfig)
 	{
 		$strClass = static::stripNamespaceFromClassName($objConfig);
 
-		return 'slick_' . substr(md5($strClass .'_'. $objConfig->id), 0, 6) . ' .slick-container';
+		return 'slick_' . substr(md5($strClass .'_'. $objConfig->id), 0, 6);
 	}
+
+	public static function getCssClassFromModel($objConfig)
+	{
+		return static::getSlickCssClassFromModel($objConfig) . (strlen($objConfig->cssClass) > 0 ? ' ' . $objConfig->cssClass : '');
+	}
+
 
 	public static function createConfigJSON($objConfig)
 	{
@@ -173,9 +192,11 @@ class SlickConfig extends \Controller
 
 				if($objTargetConfig !== null)
 				{
-					$value = '.' . static::getCssClassFromModel($objTargetConfig);
+					$value = static::getSlickSelectorFromModel($objTargetConfig);
 				}
 			}
+
+			if($key)
 
 			$arrConfig[$slickKey] = $value;
 		}

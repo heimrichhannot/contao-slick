@@ -232,7 +232,7 @@ class Slick extends \Frontend
 			$strTemplate = $this->slickgalleryTpl;
 		}
 
-		SlickConfig::createConfigJs($this->objSettings, true);
+		SlickConfig::createConfigJs($this->objSettings);
 
 		$objTemplate = new \FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);

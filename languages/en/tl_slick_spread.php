@@ -54,6 +54,9 @@ $GLOBALS['TL_LANG']['tl_slick_spread']['slick_rtl'] = array('rtl', 'Change the s
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_waitForAnimate'] = array('waitForAnimate', 'Ignores requests to advance the slide while animating. Default: true');
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_zIndex'] = array('zIndex', 'Set the zIndex values for slides, useful for IE9 and lower. Default: 1000');
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_unslick'] = array('unslick', 'Disable slick, useful within responsive settings. Default: false');
+$GLOBALS['TL_LANG']['tl_slick_spread']['initCallback'] = array('init callback', 'Add a global accessible js function callback like MySlick.initCallback here to access slick "init" callback, that must be triggered before slick carousel is created. Default: n/a');
+$GLOBALS['TL_LANG']['tl_slick_spread']['cssClass'] = array('CSS class', 'Here you can enter CSS classes seperated by space that will be added to the slick parent container.');
+
 
 /**
  * Legends
