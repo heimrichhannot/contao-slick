@@ -192,7 +192,7 @@ class SlickConfig extends \Controller
 
 				if($objTargetConfig !== null)
 				{
-					$value = static::getSlickSelectorFromModel($objTargetConfig);
+					$value = static::getSlickContainerSelectorFromModel($objTargetConfig);
 				}
 			}
 
