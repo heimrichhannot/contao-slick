@@ -54,5 +54,15 @@ class ModuleSlickNewsList extends \ModuleNewsList
 	protected function compile()
 	{
 		parent::compile();
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['compileSlickNewsList']) && is_array($GLOBALS['TL_HOOKS']['compileSlickNewsList']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['compileSlickNewsList'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->Template, $this, $this->objModel);
+			}
+		}
 	}
 }
