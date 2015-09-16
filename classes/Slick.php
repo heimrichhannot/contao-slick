@@ -207,7 +207,10 @@ class Slick extends \Frontend
 				shuffle($images);
 				break;
 		}
-
+		
+		// all files do not exist (maybe moved or deleted by FTP or else)
+		if( empty($images)) return '';
+		
 		$images = array_values($images);
 
 		// Limit the total number of items (see #2652)
