@@ -30,11 +30,15 @@ class SlickConfig extends \Controller
 		}
 
 		$strFile = 'assets/js/' . $objT->wrapperClass . '.js';
+		$strFileMinified = 'assets/js/' . $objT->wrapperClass . '.min.js';
 
 		$objFile = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
+		$objFileMinified = new \File($strFileMinified, file_exists(TL_ROOT . '/' . $strFileMinified));
+
+		$rewrite = $objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || $objFileMinified == 0|| $debug;
 
 		// simple file caching
-		if($objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || $debug)
+		if($rewrite)
 		{
 			$strChunk = $objT->parse();
 			$objFile->write($objT->parse());
@@ -43,17 +47,16 @@ class SlickConfig extends \Controller
 			// minify js
 			if($cache)
 			{
-				$strFile = str_replace('.js', '.min.js|static', $strFile);
-				$objFile = new \File($strFile);
+				$objFileMinified = new \File($strFileMinified);
 				$objMinify = new \MatthiasMullie\Minify\JS();
 				$objMinify->add($strChunk);
-				$objFile->write($objMinify->minify());
-				$objFile->close();
+				$objFileMinified->write($objMinify->minify());
+				$objFileMinified->close();
 			}
 		}
 
 		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js|static' : '.js');
-		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $strFile;
+		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $cache ? ($strFileMinified . '|static') : $strFile;
 
 	}
 
