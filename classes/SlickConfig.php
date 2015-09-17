@@ -12,7 +12,7 @@ namespace HeimrichHannot\Slick;
 
 class SlickConfig extends \Controller
 {
-	public static function createConfigJs($objConfig, $debug = false)
+	public static function createConfigJs($objConfig, $debug = true)
 	{
 		if(!static::isJQueryEnabled()) return false;
 
@@ -50,7 +50,7 @@ class SlickConfig extends \Controller
 				$objFileMinified = new \File($strFileMinified);
 				$objMinify = new \MatthiasMullie\Minify\JS();
 				$objMinify->add($strChunk);
-				$objFileMinified->write($objMinify->minify());
+				$objFileMinified->write(rtrim($objMinify->minify(), ";") . ";"); // append semicolon, otherwise "(intermediate value)(...) is not a function"
 				$objFileMinified->close();
 			}
 		}
