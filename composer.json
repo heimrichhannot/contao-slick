@@ -18,7 +18,8 @@
     },
     "require": {
         "contao/core": ">=3.2,<4-dev",
-        "menatwork/contao-multicolumnwizard": ">=2.10,<4"
+        "menatwork/contao-multicolumnwizard": ">=2.10,<4",
+        "matthiasmullie/minify": "~1.3"
     },
     "autoload": {
         "classmap": [""]
