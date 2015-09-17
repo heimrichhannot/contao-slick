@@ -148,6 +148,9 @@ class Slick extends \Frontend
 				}
 			}
 		}
+		
+		// all files do not exist (maybe moved or deleted by FTP or else)
+		if( empty($images)) return '';
 
 		// Sort array
 		switch ($this->slickSortBy)
@@ -207,9 +210,6 @@ class Slick extends \Frontend
 				shuffle($images);
 				break;
 		}
-		
-		// all files do not exist (maybe moved or deleted by FTP or else)
-		if( empty($images)) return '';
 		
 		$images = array_values($images);
 
