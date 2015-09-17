@@ -35,7 +35,7 @@ class SlickConfig extends \Controller
 		$objFile = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
 		$objFileMinified = new \File($strFileMinified, file_exists(TL_ROOT . '/' . $strFileMinified));
 
-		$rewrite = $objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || $objFileMinified == 0|| $debug;
+		$rewrite = $objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || ($cache && $objFileMinified == 0) || $debug;
 
 		// simple file caching
 		if($rewrite)
