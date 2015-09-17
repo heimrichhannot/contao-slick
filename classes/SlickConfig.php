@@ -16,7 +16,7 @@ class SlickConfig extends \Controller
 	{
 		if(!static::isJQueryEnabled()) return false;
 
-		$cache = !$GLOBALS['TL_CONFIG']['bypassCache'];
+		$cache = !$GLOBALS['TL_CONFIG']['debugMode'];
 
 		$objT = new \FrontendTemplate('jquery.slick');
 
@@ -36,12 +36,25 @@ class SlickConfig extends \Controller
 		// simple file caching
 		if($objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || $debug)
 		{
+			$strChunk = $objT->parse();
 			$objFile->write($objT->parse());
 			$objFile->close();
+
+			// minify js
+			if($cache)
+			{
+				$strFile = str_replace('.js', '.min.js|static', $strFile);
+				$objFile = new \File($strFile);
+				$objMinify = new \MatthiasMullie\Minify\JS();
+				$objMinify->add($strChunk);
+				$objFile->write($objMinify->minify());
+				$objFile->close();
+			}
 		}
 
-		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.js'  . ($cache ? '|static' : '');
-		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $strFile . ($cache ? '|static' : '');
+		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js|static' : '.js');
+		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $strFile;
+
 	}
 
 	public static function isJQueryEnabled()
