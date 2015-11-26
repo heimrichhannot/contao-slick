@@ -35,10 +35,8 @@ class SlickConfig extends \Controller
 		$objFile = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
 		$objFileMinified = new \File($strFileMinified, file_exists(TL_ROOT . '/' . $strFileMinified));
 
-		$rewrite = static::doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug);
-
 		// simple file caching
-		if($rewrite)
+		if(static::doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug))
 		{
 			$strChunk = $objT->parse();
 			$objFile->write($objT->parse());
@@ -81,6 +79,7 @@ class SlickConfig extends \Controller
 				if($objResponsiveConfig->tstamp > $objFile->mtime)
 				{
 					$rewrite = true;
+					break;
 				}
 			}
 		}
