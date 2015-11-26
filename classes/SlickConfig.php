@@ -35,7 +35,7 @@ class SlickConfig extends \Controller
 		$objFile = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
 		$objFileMinified = new \File($strFileMinified, file_exists(TL_ROOT . '/' . $strFileMinified));
 
-		$rewrite = $objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || ($cache && $objFileMinified == 0) || $debug;
+		$rewrite = static::doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug);
 
 		// simple file caching
 		if($rewrite)
@@ -57,7 +57,35 @@ class SlickConfig extends \Controller
 
 		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js|static' : '.js');
 		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $cache ? ($strFileMinified . '|static') : $strFile;
+	}
 
+	public static function doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug)
+	{
+		$rewrite = $objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || ($cache && $objFileMinified == 0) || $debug;
+
+		// do not check changes to responsive config, if parent config has been changed (performance)
+		if($rewrite) return $rewrite;
+
+		$arrResponsive = deserialize($objConfig->slick_responsive, true);
+
+		if(!empty($arrResponsive))
+		{
+			foreach($arrResponsive as $config)
+			{
+				if(empty($config['slick_settings'])) continue;
+
+				$objResponsiveConfig = SlickConfigModel::findByPk($config['slick_settings']);
+
+				if($objResponsiveConfig === null) continue;
+
+				if($objResponsiveConfig->tstamp > $objFile->mtime)
+				{
+					$rewrite = true;
+				}
+			}
+		}
+
+		return $rewrite;
 	}
 
 	public static function isJQueryEnabled()
