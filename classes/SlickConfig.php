@@ -34,6 +34,7 @@ class SlickConfig extends \Controller
 
 		$objFile = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
 		$objFileMinified = new \File($strFileMinified, file_exists(TL_ROOT . '/' . $strFileMinified));
+		$minify = $cache && class_exists('\MatthiasMullie\Minify\JS');
 
 		// simple file caching
 		if(static::doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug))
@@ -43,7 +44,7 @@ class SlickConfig extends \Controller
 			$objFile->close();
 
 			// minify js
-			if($cache && class_exists('\MatthiasMullie\Minify\JS'))
+			if($minify)
 			{
 				$objFileMinified = new \File($strFileMinified);
 				$objMinify = new \MatthiasMullie\Minify\JS();
@@ -54,7 +55,7 @@ class SlickConfig extends \Controller
 		}
 
 		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js|static' : '.js');
-		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $cache ? ($strFileMinified . '|static') : $strFile;
+		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $minify ? ($strFileMinified . '|static') : $strFile;
 	}
 
 	public static function doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug)
