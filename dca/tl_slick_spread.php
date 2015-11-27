@@ -9,8 +9,6 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-$this->import('\HeimrichHannot\Slick\Constants');
-
 // Content Fields
 \Controller::loadDataContainer('tl_content');
 \Controller::loadLanguageFile('tl_content');

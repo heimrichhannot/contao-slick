@@ -41,7 +41,6 @@ ClassLoader::addClasses(array
 
 	// Classes
 	'HeimrichHannot\Slick\Slick'                      => 'system/modules/slick/classes/Slick.php',
-	'HeimrichHannot\Slick\Constants'                  => 'system/modules/slick/classes/Constants.php',
 	'HeimrichHannot\Slick\Hooks'                      => 'system/modules/slick/classes/Hooks.php',
 	'HeimrichHannot\Slick\SlickUpdater'               => 'system/modules/slick/classes/SlickUpdater.php',
 	'HeimrichHannot\Slick\SlickConfig'                => 'system/modules/slick/classes/SlickConfig.php',

@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Constants
+ */
+define('SLICK_PALETTE_DEFAULT', 'default');
+define('SLICK_PALETTE_FLAT', 'flat');
+define('SLICK_PALETTE_PRESETCONFIG', 'presetConfig');
+define('SLICK_PALETTE_GALLERY', 'gallery');
+define('SLICK_PALETTE_CONTENT', 'slick');
+define('SLICK_PALETTE_CONTENT_SLIDER_START', 'slick-content-start');
+define('SLICK_PALETTE_CONTENT_SLIDER_END', 'slick-content-end');
+
+/**
  * Hooks
  */
 $GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('\HeimrichHannot\Slick\Hooks', 'loadDataContainerHook');
@@ -26,6 +37,7 @@ $GLOBALS['TL_SLICK']['SUPPORTED']['tl_module']['slick_combinedlist'] = 'type;[[S
  * Back end modules
  */
 array_insert($GLOBALS['BE_MOD']['system'], 1, array(
+
 	'slick_config' => array
 	(
 		'tables' => array('tl_slick_config'),
