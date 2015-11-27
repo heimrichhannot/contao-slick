@@ -43,7 +43,7 @@ class SlickConfig extends \Controller
 			$objFile->close();
 
 			// minify js
-			if($cache)
+			if($cache && class_exists('\MatthiasMullie\Minify\JS'))
 			{
 				$objFileMinified = new \File($strFileMinified);
 				$objMinify = new \MatthiasMullie\Minify\JS();
