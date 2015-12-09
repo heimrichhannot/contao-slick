@@ -17,7 +17,7 @@
         "issues":"https://github.com/heimrichhannot/contao-slick/issues"
     },
     "require": {
-        "contao/core": ">=3.2,<4-dev",
+        "contao/core": ">=3.4,<4-dev",
         "menatwork/contao-multicolumnwizard": ">=2.10,<4",
         "matthiasmullie/minify": "~1.3"
     },
