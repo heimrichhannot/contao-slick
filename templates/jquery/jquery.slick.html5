@@ -12,6 +12,9 @@
 			var slick = $('<?= $this->selector;?>').slick({
 				<?= $this->config;?>
 			});
+		// add slick-initialized for non-slick sliders, otherwise the will stay invisible
+		} else {
+			slick.addClass('slick-initialized');
 		}
 	});
 })(jQuery);
