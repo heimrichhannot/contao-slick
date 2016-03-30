@@ -12,7 +12,7 @@ namespace HeimrichHannot\Slick;
 
 class SlickConfig extends \Controller
 {
-	public static function createConfigJs($objConfig, $debug = false)
+	public static function createConfigJs($objConfig, $debug = false, $blnAjax = false)
 	{
 		if(!static::isJQueryEnabled()) return false;
 
@@ -54,8 +54,16 @@ class SlickConfig extends \Controller
 			}
 		}
 
-		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js|static' : '.js');
-		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $minify ? ($strFileMinified . '|static') : $strFile;
+		if ($blnAjax)
+		{
+			$strLib = TL_ROOT . '/system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js' : '.js');
+			return '<script>' . file_get_contents($strLib) . $objT->parse() . '</script>';
+		}
+		else
+		{
+			$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js|static' : '.js');
+			$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $minify ? ($strFileMinified . '|static') : $strFile;
+		}
 	}
 
 	public static function doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug)
