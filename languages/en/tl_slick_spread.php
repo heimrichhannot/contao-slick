@@ -56,7 +56,7 @@ $GLOBALS['TL_LANG']['tl_slick_spread']['slick_zIndex'] = array('zIndex', 'Set th
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_unslick'] = array('unslick', 'Disable slick, useful within responsive settings. Default: false');
 $GLOBALS['TL_LANG']['tl_slick_spread']['initCallback'] = array('init callback', 'Add a global accessible js function callback like MySlick.initCallback here to access slick "init" callback, that must be triggered before slick carousel is created. Default: n/a');
 $GLOBALS['TL_LANG']['tl_slick_spread']['cssClass'] = array('CSS class', 'Here you can enter CSS classes seperated by space that will be added to the slick parent container.');
-
+$GLOBALS['TL_LANG']['tl_slick_spread']['slick_shuffleOrder'] = array('Activate random order.', 'Elements of the slider are displayed in random order.');
 
 /**
  * Legends

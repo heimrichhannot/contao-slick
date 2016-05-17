@@ -48,6 +48,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 							slick_fade,
 							slick_focusOnSelect,
 							slick_infinite,
+							slick_shuffleOrder,
 							slick_initialSlide,
 							slick_lazyLoad,
 							slick_mobileFirst,
@@ -702,6 +703,19 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''",
 		),
+		'slick_shuffleOrder'          => array
+		(
+				'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_shuffleOrder'],
+				'inputType' => 'checkbox',
+				'exclude'   => true,
+				'eval'      => array
+				(
+						'tl_class'   => 'w50',
+						'isJsObject' => true,
+				),
+				'sql'       => "char(1) NOT NULL default ''",
+		),
+
 		// END: Slick JS defaults / options
 
 		// init callback must be called before slick object is initialized, provide global callback

@@ -2,6 +2,7 @@
 
 <?php $this->block('content'); ?>
 
+
   <?php if (empty($this->articles)): ?>
     <p class="empty"><?php echo $this->empty; ?></p>
   <?php else: ?>

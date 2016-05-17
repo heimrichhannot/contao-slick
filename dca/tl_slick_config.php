@@ -11,6 +11,9 @@
 /**
  * Table tl_slick_config
  */
+
+
+
 $GLOBALS['TL_DCA']['tl_slick_config'] = array(
 
 	// Config

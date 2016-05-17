@@ -69,7 +69,7 @@ $GLOBALS['TL_LANG']['tl_slick_spread']['slick_zIndex'] = array('zIndex', 'zIndex
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_unslick'] = array('unslick', 'Slick deaktivieren, nützlich mit Responsive-Einstellungen. Standard: false');
 $GLOBALS['TL_LANG']['tl_slick_spread']['initCallback'] = array('init callback', 'Add a global accessible js function callback like MySlick.initCallback here to access slick "init" callback, that must be triggered before slick carousel is created. Standard: n/a');
 $GLOBALS['TL_LANG']['tl_slick_spread']['cssClass'] = array('CSS-Klasse', 'Hier können Sie CSS-Klassen, durch Leerzeichen getrennt hinterlegen, die dem Slick-Karussell Elternelement hinzugefügt werden.');
-
+$GLOBALS['TL_LANG']['tl_slick_spread']['slick_shuffleOrder'] = array('Zufällige Reihenfolge aktivieren.', 'Elemente des Sliders werden in zufälliger Reihenfolge dargestellt.');
 /**
  * Legends
  */
