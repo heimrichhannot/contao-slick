@@ -20,6 +20,8 @@ class SlickConfig extends \Controller
 
 		$objT = new \FrontendTemplate('jquery.slick');
 
+		$arrData = static::createConfig($objConfig);
+		$objT->setData($arrData['config']);
 		$objT->config = static::createConfigJSON($objConfig);
 		$objT->selector = static::getSlickContainerSelectorFromModel($objConfig);
 		$objT->wrapperClass = static::getSlickCssClassFromModel($objConfig);
@@ -27,6 +29,11 @@ class SlickConfig extends \Controller
 		if($objConfig->initCallback)
 		{
 			$objT->initCallback = $objConfig->initCallback;
+		}
+
+		if($objConfig->afterInitCallback)
+		{
+			$objT->afterInitCallback = $objConfig->afterInitCallback;
 		}
 
 		$strFile = 'assets/js/' . $objT->wrapperClass . '.js';
@@ -56,12 +63,13 @@ class SlickConfig extends \Controller
 
 		if ($blnAjax)
 		{
-			$strLib = TL_ROOT . '/system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js' : '.js');
+			$strLib = TL_ROOT . '/system/modules/slick/assets/vendor/slick-carousel/slick/slick' . ($cache ? '.min.js' : '.js');
 			return '<script>' . file_get_contents($strLib) . $objT->parse() . '</script>';
 		}
 		else
 		{
-			$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick' . ($cache ? '.min.js|static' : '.js');
+			$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick-carousel/slick/slick' . ($cache ? '.min.js|static' : '.js');
+			$GLOBALS['TL_JAVASCRIPT']['slick-functions'] = 'system/modules/slick/assets/js/jquery.slick-functions' . ($cache ? '.min.js|static' : '.js');
 			$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $minify ? ($strFileMinified . '|static') : $strFile;
 		}
 	}
@@ -240,6 +248,8 @@ class SlickConfig extends \Controller
 
 			if($key == 'slick_asNavFor')
 			{
+				$value = null; // should be null by default
+
 				$objTargetConfig = SlickConfigModel::findByPk($value);
 
 				if($objTargetConfig !== null)

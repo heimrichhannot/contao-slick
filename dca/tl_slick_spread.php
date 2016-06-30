@@ -48,11 +48,11 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 							slick_fade,
 							slick_focusOnSelect,
 							slick_infinite,
-							slick_shuffleOrder,
 							slick_initialSlide,
 							slick_lazyLoad,
 							slick_mobileFirst,
 							slick_pauseOnHover,
+							slick_pauseOnFocus,
 							slick_pauseOnDotsHover,
 							slick_respondTo,
 							slick_responsive,
@@ -67,14 +67,17 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 							slick_touchMove,
 							slick_touchThreshold,
 							slick_useCSS,
+							slick_useTransform,
 							slick_variableWidth,
 							slick_vertical,
 							slick_verticalSwiping,
 							slick_rtl,
 							slick_waitForAnimate,
+							slick_shuffleOrder,
 							slick_zIndex,
 							slick_unslick,
 							initCallback,
+							afterInitCallback,
 							cssClass
 							',
 		'addGallery' => 'slickMultiSRC,slickSortBy,slickUseHomeDir,slickSize,slickFullsize,slickNumberOfItems,slickgalleryTpl,slickCustomTpl',
@@ -426,6 +429,18 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''",
 		),
+		'slick_pauseOnFocus'     => array
+		(
+			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pauseOnFocus'],
+			'inputType' => 'checkbox',
+			'default'   => true,
+			'exclude'   => true,
+			'eval'      => array
+			(
+				'tl_class' => 'w50',
+			),
+			'sql'       => "char(1) NOT NULL default ''",
+		),
 		'slick_pauseOnDotsHover' => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pauseOnDotsHover'],
@@ -633,6 +648,18 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''",
 		),
+		'slick_useTransform'     => array
+		(
+			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_useTransform'],
+			'inputType' => 'checkbox',
+			'exclude'   => true,
+			'default'   => true,
+			'eval'      => array
+			(
+				'tl_class' => 'clr w50',
+			),
+			'sql'       => "char(1) NOT NULL default ''",
+		),
 		'slick_variableWidth'    => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_variableWidth'],
@@ -703,17 +730,17 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''",
 		),
-		'slick_shuffleOrder'          => array
+		'slick_shuffleOrder'     => array
 		(
-				'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_shuffleOrder'],
-				'inputType' => 'checkbox',
-				'exclude'   => true,
-				'eval'      => array
-				(
-						'tl_class'   => 'w50',
-						'isJsObject' => true,
-				),
-				'sql'       => "char(1) NOT NULL default ''",
+			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_shuffleOrder'],
+			'inputType' => 'checkbox',
+			'exclude'   => true,
+			'eval'      => array
+			(
+				'tl_class'   => 'w50',
+				'isJsObject' => true,
+			),
+			'sql'       => "char(1) NOT NULL default ''",
 		),
 
 		// END: Slick JS defaults / options
@@ -726,6 +753,17 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			'eval'      => array
 			(
 				'tl_class' => 'w50 clr',
+			),
+			'sql'       => "varchar(255) NOT NULL default ''",
+		),
+		// after init callback contains the initialized slick slider object
+		'afterInitCallback'      => array(
+			'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['afterInitCallback'],
+			'inputType' => 'text',
+			'exclude'   => true,
+			'eval'      => array
+			(
+				'tl_class' => 'w50',
 			),
 			'sql'       => "varchar(255) NOT NULL default ''",
 		),

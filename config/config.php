@@ -56,7 +56,7 @@ if (TL_MODE == 'FE')
 	/**
 	 * CSS
 	 */
-	$GLOBALS['TL_USER_CSS']['slick'] = 'system/modules/slick/assets/vendor/slick.js/slick/slick.css|static';
+	$GLOBALS['TL_USER_CSS']['slick'] = 'system/modules/slick/assets/vendor/slick-carousel/slick/slick.css|static';
 	$GLOBALS['TL_USER_CSS']['slick_custom'] = 'system/modules/slick/assets/css/slick-custom.min.css|static';
 }
 

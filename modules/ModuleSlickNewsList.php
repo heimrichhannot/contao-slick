@@ -44,13 +44,6 @@ class ModuleSlickNewsList extends \ModuleNewsList
 			$this->Template->class .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick';
 		}
 
-		if($objConfig->slick_shuffleOrder && is_array($this->Template->articles) && count($this->Template->articles)>1)
-		{
-			$arrArticles = $this->Template->articles;
-			shuffle($arrArticles);
-			$this->Template->articles = $arrArticles;
-		}
-
 		return $this->Template->parse();
 	}
 

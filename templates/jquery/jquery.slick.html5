@@ -1,20 +1,29 @@
 (function($){
 	$(document).ready(function(){
-		var slick = $('<?= $this->selector;?>');
+		var el = $('<?= $this->selector;?>');
 
 		<?php if($this->initCallback) : ?>
 			// init callback must be triggered befor slick carousel is created (see #1005)
-			if (typeof <?= $this->initCallback; ?> == 'function') <?= $this->initCallback; ?> (slick);
+			if (typeof <?= $this->initCallback; ?> == 'function') <?= $this->initCallback; ?> (el);
 		<?php endif; ?>
 
 		// initialize slick, if more than one slide
-		if(slick.children().length > 1){
-			var slick = $('<?= $this->selector;?>').slick({
+		if(el.children().length > 1){
+			<?php if($this->shuffleOrder): ?>
+				el.children().randomize();
+			<?php endif; ?>
+
+			var slick = el.slick({
 				<?= $this->config;?>
 			});
+
+			<?php if($this->afterInitCallback) : ?>
+				if (typeof <?= $this->afterInitCallback; ?> == 'function') <?= $this->afterInitCallback; ?> (slick, el);
+			<?php endif; ?>
 		// add slick-initialized for non-slick sliders, otherwise the will stay invisible
 		} else {
 			slick.addClass('slick-initialized');
 		}
 	});
+
 })(jQuery);
