@@ -22,7 +22,7 @@
 			<?php endif; ?>
 		// add slick-initialized for non-slick sliders, otherwise the will stay invisible
 		} else {
-			slick.addClass('slick-initialized');
+			el.addClass('slick-initialized');
 		}
 	});
 
