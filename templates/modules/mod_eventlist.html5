@@ -1,0 +1,9 @@
+<?php $this->extend($this->type == 'slick_eventlist' ? 'block_slick' : 'block_unsearchable'); ?>
+
+<?php $this->block('content'); ?>
+
+<?= $this->events ?>
+
+<?= $this->pagination ?>
+
+<?php $this->endblock(); ?>

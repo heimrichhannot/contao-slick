@@ -13,3 +13,4 @@
  */
 $GLOBALS['TL_LANG']['FMD']['slick'] = 'Slick-Slider';
 $GLOBALS['TL_LANG']['FMD']['slick_newslist'] = array('Nachrichtenliste als Slick-Karussell', 'Mit diesem Modul wird die Nachrichtenliste in einem Slick-Karussell ausgegeben.');
+$GLOBALS['TL_LANG']['FMD']['slick_eventlist'] = array('Eventliste als Slick-Karussell', 'Mit diesem Modul wird die Eventliste in einem Slick-Karussell ausgegeben.');

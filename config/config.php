@@ -25,6 +25,9 @@ $GLOBALS['TL_SLICK']['SUPPORTED']['tl_module']['slick_newslist'] = 'type;[[SLICK
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_news_archive']['default']  = 'jumpTo;[[SLICK_PALETTE_PRESETCONFIG]]';
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_news']['default']          = 'addImage;[[SLICK_PALETTE_GALLERY]]';
 
+// Event support
+$GLOBALS['TL_SLICK']['SUPPORTED']['tl_module']['slick_eventlist'] = 'type;[[SLICK_PALETTE_PRESETCONFIG]]';
+
 // Content support
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_content']['slick-slider']               = '[[SLICK_PALETTE_CONTENT]]';
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_content']['slick-content-start'] = '[[SLICK_PALETTE_CONTENT_SLIDER_START]]';
@@ -49,7 +52,8 @@ array_insert($GLOBALS['BE_MOD']['system'], 1, array(
 /**
  * Front end modules
  */
-$GLOBALS['FE_MOD']['news']['slick_newslist'] = '\HeimrichHannot\Slick\ModuleSlickNewsList';
+$GLOBALS['FE_MOD']['news']['slick_newslist'] = 'HeimrichHannot\Slick\ModuleSlickNewsList';
+$GLOBALS['FE_MOD']['events']['slick_eventlist'] = 'HeimrichHannot\Slick\ModuleSlickEventList';
 
 if (TL_MODE == 'FE')
 {
