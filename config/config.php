@@ -97,3 +97,12 @@ $GLOBALS['TL_WRAPPERS']['separator'][] = 'slick-nav-separator';
  * Models
  */
 $GLOBALS['TL_MODELS']['tl_slick_config'] = 'HeimrichHannot\Slick\SlickConfigModel';
+
+
+/**
+ * Modal module configuration
+ */
+$GLOBALS['MODAL_MODULES']['slick_newslist'] = array
+(
+	'invokePalette' => 'customTpl;'
+);

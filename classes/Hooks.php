@@ -37,7 +37,7 @@ class Hooks extends \Controller
 	{
 		if (!is_array($GLOBALS['TL_SLICK']['SUPPORTED']) || !in_array($strName, array_keys($GLOBALS['TL_SLICK']['SUPPORTED']))) return false;
 
-		$this->loadDataContainer(static::$strSpreadDca);
+		\Controller::loadDataContainer(static::$strSpreadDca);
 
 		if (!is_array($GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'])) return false;
 

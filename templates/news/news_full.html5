@@ -38,13 +38,13 @@
 
 		</figure>
 	<?php endif; ?>
-
-
-	<?php if ($this->text): ?>
-		<?php echo $this->text; ?>
+	
+	
+	<?php if ($this->hasText): ?>
+		<?= $this->text ?>
 	<?php else: ?>
 		<div class="ce_text block">
-			<?php echo $this->teaser; ?>
+			<?= $this->teaser ?>
 		</div>
 	<?php endif; ?>
 

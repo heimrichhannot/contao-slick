@@ -9,9 +9,9 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-// Content Fields
-\Controller::loadDataContainer('tl_content');
-\Controller::loadLanguageFile('tl_content');
+//// Content Fields
+//\Controller::loadDataContainer('tl_content');
+//\Controller::loadLanguageFile('tl_content');
 
 // reusable palettes extension for tl_news, tl_content, tl_module etc
 $GLOBALS['TL_DCA']['tl_slick_spread'] = array
@@ -794,7 +794,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread']['fields']['slickMultiSRC']['eval']['isGall
 $GLOBALS['TL_DCA']['tl_content']['fields']['multiSRC']['load_callback'][] = array('tl_slick_spread', 'setFileTreeFlags');
 
 
-class tl_slick_spread extends \Backend
+class tl_slick_spread extends Backend
 {
 	/**
 	 * Return all gallery templates as array
