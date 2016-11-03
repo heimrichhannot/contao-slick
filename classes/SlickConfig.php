@@ -12,7 +12,7 @@ namespace HeimrichHannot\Slick;
 
 class SlickConfig extends \Controller
 {
-	public static function createConfigJs($objConfig, $debug = false, $blnAjax = false)
+	public static function createConfigJs($objConfig, $debug = false)
 	{
 		if(!static::isJQueryEnabled()) return false;
 
@@ -61,17 +61,9 @@ class SlickConfig extends \Controller
 			}
 		}
 
-		if ($blnAjax)
-		{
-			$strLib = TL_ROOT . '/system/modules/slick/assets/vendor/slick-carousel/slick/slick' . ($cache ? '.min.js' : '.js');
-			return '<script>' . file_get_contents($strLib) . $objT->parse() . '</script>';
-		}
-		else
-		{
-			$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick-carousel/slick/slick' . ($cache ? '.min.js|static' : '.js');
-			$GLOBALS['TL_JAVASCRIPT']['slick-functions'] = 'system/modules/slick/assets/js/jquery.slick-functions' . ($cache ? '.min.js|static' : '.js');
-			$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $minify ? ($strFileMinified . '|static') : $strFile;
-		}
+		$GLOBALS['TL_JAVASCRIPT']['slick'] = 'system/modules/slick/assets/vendor/slick-carousel/slick/slick' . ($cache ? '.min.js|static' : '.js');
+		$GLOBALS['TL_JAVASCRIPT']['slick-functions'] = 'system/modules/slick/assets/js/jquery.slick-functions' . ($cache ? '.min.js|static' : '.js');
+		$GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $minify ? ($strFileMinified . '|static') : $strFile;
 	}
 
 	public static function doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug)

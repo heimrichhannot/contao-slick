@@ -36,8 +36,6 @@ class ContentSlickNavStart extends \ContentElement
 
 		if ($objConfig === null) return;
 
-		SlickConfig::createConfigJs($objConfig);
-
 		$objSlider = \ContentModel::findByPk($this->slickContentSlider);
 
 		if($objSlider === null) return;

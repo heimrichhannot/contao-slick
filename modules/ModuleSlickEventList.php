@@ -40,7 +40,6 @@ class ModuleSlickEventList extends \ModuleEventlist
 
 		if($objConfig !== null)
 		{
-			SlickConfig::createConfigJs($objConfig);
 			$this->Template->class .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick';
 		}
 

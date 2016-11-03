@@ -40,7 +40,6 @@ class ModuleSlickNewsList extends \ModuleNewsList
 
 		if($objConfig !== null)
 		{
-			SlickConfig::createConfigJs($objConfig);
 			$this->Template->class .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick';
 		}
 

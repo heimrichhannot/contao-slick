@@ -35,8 +35,6 @@ class ContentSlickContentStart extends \ContentElement
 
 		if ($objConfig === null) return;
 
-		SlickConfig::createConfigJs($objConfig);
-
 		$this->Template->class .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick ' . SlickConfig::getCssClassForContent($this->id);
 		$this->Template->syncid = SlickConfig::getCssClassForContent($this->id);
 

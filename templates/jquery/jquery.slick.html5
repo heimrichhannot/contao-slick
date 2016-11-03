@@ -1,5 +1,5 @@
 (function($){
-	$(document).ready(function(){
+	function initSlick(){
 		var el = $('<?= $this->selector;?>');
 
 		<?php if($this->initCallback) : ?>
@@ -24,6 +24,14 @@
 		} else {
 			el.addClass('slick-initialized');
 		}
+	};
+
+	$(document).ready(function(){
+		initSlick();
+	});
+
+	$(document).on('shown.bs.modal', '.modal', function(){
+		initSlick();
 	});
 
 })(jQuery);
