@@ -23,8 +23,8 @@ $GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'][] = array('HeimrichHannot\Slick
  */
 // News support
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_module']['slick_newslist'] = 'type;[[SLICK_PALETTE_PRESETCONFIG]]';
-$GLOBALS['TL_SLICK']['SUPPORTED']['tl_news_archive']['default']  = 'jumpTo;[[SLICK_PALETTE_PRESETCONFIG]]';
-$GLOBALS['TL_SLICK']['SUPPORTED']['tl_news']['default']          = 'addImage;[[SLICK_PALETTE_GALLERY]]';
+$GLOBALS['TL_SLICK']['SUPPORTED']['tl_news_archive']['default']  = '[[SLICK_PALETTE_PRESETCONFIG]]{comments_legend';
+$GLOBALS['TL_SLICK']['SUPPORTED']['tl_news']['default']          = '[[SLICK_PALETTE_GALLERY]]{enclosure_legend';
 
 // Event support
 $GLOBALS['TL_SLICK']['SUPPORTED']['tl_module']['slick_eventlist'] = 'type;[[SLICK_PALETTE_PRESETCONFIG]]';
