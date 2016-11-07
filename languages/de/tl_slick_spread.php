@@ -15,6 +15,14 @@
 $GLOBALS['TL_LANG']['tl_slick_spread']['slickConfig'] = array('Slick-Karussell Konfiguration', 'Wählen Sie aus der Liste eine Slick-Karussell Konfiguration aus.');
 $GLOBALS['TL_LANG']['tl_slick_spread']['addSlick'] = array('Slick-Karussell hinzufügen', 'Slick-Karussell Unterstützung aktivieren');
 $GLOBALS['TL_LANG']['tl_slick_spread']['addGallery'] = array('Galerie hinzufügen', 'Eine Bildergalerie erzeugen.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickMultiSRC'] = array('Quelldateien', 'Bitte wählen Sie eine oder mehr Dateien oder Ordner aus der Dateiübersicht. Wenn Sie einen Ordner auswählen, werden die darin enthaltenen Dateien automatisch eingefügt.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickOrderSRC'] = array('Sortierreihenfolge', 'Die Sortierreihenfolge der Elemente.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickSortBy'] = array('Sortieren nach', 'Bitte wählen Sie die Sortierreihenfolge aus.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickUseHomeDir'] = array('Benutzerverzeichnis verwenden', 'Das Benutzerverzeichnis als Dateiquelle verwenden, wenn sich ein Benutzer angemeldet hat.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickSize'] = array('Bildgröße', 'Hier können Sie die Abmessungen des Bildes und den Skalierungsmodus festlegen.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickFullsize'] = array('Großansicht/Neues Fenster', 'Großansicht des Bildes in einer Lightbox bzw. den Link in einem neuem Browserfenster öffnen.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickNumberOfItems'] = array('Gesamtzahl der Bilder', 'Hier können Sie die Gesamtzahl der Bilder begrenzen. Geben Sie 0 ein, um alle anzuzeigen.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickCustomTpl'] = array('Individuelles Template', 'Hier können Sie das Standard-Template überschreiben.');
 
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_accessibility'] = array('accessibility', 'Aktiviert Tab- und Pfeiltasten-Navigation. Standard: true');
 

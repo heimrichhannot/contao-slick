@@ -9,10 +9,6 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-//// Content Fields
-//\Controller::loadDataContainer('tl_content');
-//\Controller::loadLanguageFile('tl_content');
-
 // reusable palettes extension for tl_news, tl_content, tl_module etc
 $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 (
@@ -120,14 +116,76 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			),
 			'sql'       => "char(1) NOT NULL default ''",
 		),
-		'slickMultiSRC'          => $GLOBALS['TL_DCA']['tl_content']['fields']['multiSRC'],
-		'slickOrderSRC'          => $GLOBALS['TL_DCA']['tl_content']['fields']['orderSRC'],
-		'slickSortBy'            => $GLOBALS['TL_DCA']['tl_content']['fields']['sortBy'],
-		'slickUseHomeDir'        => $GLOBALS['TL_DCA']['tl_content']['fields']['useHomeDir'],
-		'slickSize'              => $GLOBALS['TL_DCA']['tl_content']['fields']['size'],
-		'slickFullsize'          => $GLOBALS['TL_DCA']['tl_content']['fields']['fullsize'],
-		'slickNumberOfItems'     => $GLOBALS['TL_DCA']['tl_content']['fields']['numberOfItems'],
-		'slickCustomTpl'         => $GLOBALS['TL_DCA']['tl_content']['fields']['customTpl'],
+        'slickMultiSRC' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickMultiSRC'],
+            'exclude'                 => true,
+            'inputType'               => 'fileTree',
+            'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'orderField'=>'orderSRC', 'files'=>true, 'mandatory'=>true),
+            'sql'                     => "blob NULL",
+            'load_callback' => array
+            (
+                array('tl_content', 'setMultiSrcFlags')
+            )
+        ),
+        'slickOrderSRC' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickOrderSRC'],
+            'sql'                     => "blob NULL"
+        ),
+        'slickSortBy' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickSortBy'],
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options'                 => array('custom', 'name_asc', 'name_desc', 'date_asc', 'date_desc', 'random'),
+            'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
+            'eval'                    => array('tl_class'=>'w50'),
+            'sql'                     => "varchar(32) NOT NULL default ''"
+        ),
+        'slickUseHomeDir' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickUseHomeDir'],
+            'exclude'                 => true,
+            'inputType'               => 'checkbox',
+            'eval'                    => array('tl_class'=>'w50'),
+            'sql'                     => "char(1) NOT NULL default ''"
+        ),
+        'slickSize' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickSize'],
+            'exclude'                 => true,
+            'inputType'               => 'imageSize',
+            'options'                 => System::getImageSizes(),
+            'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+            'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(64) NOT NULL default ''"
+        ),
+        'slickFullsize' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickFullsize'],
+            'exclude'                 => true,
+            'inputType'               => 'checkbox',
+            'eval'                    => array('tl_class'=>'w50 m12'),
+            'sql'                     => "char(1) NOT NULL default ''"
+        ),
+        'slickNumberOfItems' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickNumberOfItems'],
+            'exclude'                 => true,
+            'inputType'               => 'text',
+            'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
+            'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
+        ),
+        'slickCustomTpl' => array
+        (
+            'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickCustomTpl'],
+            'exclude'                 => true,
+            'inputType'               => 'select',
+            'options_callback'        => array('tl_content', 'getElementTemplates'),
+            'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
+            'sql'                     => "varchar(64) NOT NULL default ''"
+        ),
 		'slickgalleryTpl'        => array
 		(
 			'label'            => &$GLOBALS['TL_LANG']['tl_content']['galleryTpl'],

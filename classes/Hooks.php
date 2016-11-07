@@ -129,6 +129,12 @@ class Hooks extends \Controller
                 $dc['palettes'][$strPalette] = $replace;
             } else
             {
+                // do not replace multiple times
+                if(!$replace || strpos($dc['palettes'][$strPalette], $replace) !== false)
+                {
+                    continue;
+                }
+
                 $dc['palettes'][$strPalette] = str_replace($search, $replace, $dc['palettes'][$strPalette]);
             }
 

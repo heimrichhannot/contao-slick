@@ -6,6 +6,14 @@
 $GLOBALS['TL_LANG']['tl_slick_spread']['slickConfig'] = array('Slick carousel config preset', 'Choose a slick carousel config preset from the list.');
 $GLOBALS['TL_LANG']['tl_slick_spread']['addSlick'] = array('Add slick carousel', 'Add slick carousel support');
 $GLOBALS['TL_LANG']['tl_slick_spread']['addGallery'] = array('Add gallery', 'Add an image gallery.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickMultiSRC'] = array('Source files', 'Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickOrderSRC'] = array('Sort order', 'The sort order of the items.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickSortBy'] = array('Order by', 'Please choose the sort order.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickUseHomeDir'] = array('Use home directory', 'Use the home directory as file source if there is an authenticated user.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickSize'] = array('Image size', 'Here you can set the image dimensions and the resize mode.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickFullsize'] = array('Full-size view/new window', 'Open the full-size image in a lightbox or the link in a new browser window.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickNumberOfItems'] = array('Total number of images', 'Here you can limit the total number of images. Set to 0 to show all.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slickCustomTpl'] = array('Custom element template', 'Here you can overwrite the default element template.');
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_accessibility'] = array('accessibility', 'Enables tabbing and arrow key navigation. Default: true');
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_appendArrows'] = array('appendArrows', 'Enables auto play of slides. Default: false');
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_adaptiveHeight'] = array('adaptiveHeight', 'Enables adaptive height of slides. Default: false');
