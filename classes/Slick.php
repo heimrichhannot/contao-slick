@@ -111,6 +111,12 @@ class Slick extends \Frontend
 
 				while ($objSubfiles->next())
 				{
+                    // Continue if the files has been processed or does not exist
+                    if (isset($images[$objSubfiles->path]) || !file_exists(TL_ROOT . '/' . $objSubfiles->path))
+                    {
+                        continue;
+                    }
+
 					// Skip subfolders
 					if ($objSubfiles->type == 'folder')
 					{
