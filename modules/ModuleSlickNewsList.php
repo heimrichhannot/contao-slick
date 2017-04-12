@@ -60,7 +60,7 @@ class ModuleSlickNewsList extends \ModuleNewsList
 			foreach ($GLOBALS['TL_HOOKS']['compileSlickNewsList'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($this->Template, $this, $this->objModel);
+				$this->{$callback[0]}->{$callback[1]}($this->Template, $this, $this->objModel);
 			}
 		}
 	}

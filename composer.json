@@ -1,34 +1,43 @@
 {
-    "name": "heimrichhannot/contao-slick",
-    "description":"Slick, a content slider for contao.",
-    "keywords":["contao", "carousel", "slider", "slick"],
-    "type": "contao-module",
-    "homepage":"https://github.com/heimrichhannot/contao-slick",
-    "license":"LGPL-3.0+",
-    "authors":[
-        {
-            "name":"Heimrich & Hannot",
-            "email":"digitales@heimrich-hannot.de",
-            "homepage":"http://www.heimrich-hannot.de",
-            "role":"Developer"
-        }
-    ],
-    "support":{
-        "issues":"https://github.com/heimrichhannot/contao-slick/issues"
-    },
-    "require": {
-        "contao/core": ">=3.4,<4-dev",
-        "menatwork/contao-multicolumnwizard": ">=2.10,<4",
-        "matthiasmullie/minify": "~1.3"
-    },
-    "autoload": {
-        "classmap": [""]
-    },
-    "extra": {
-        "contao": {
-            "sources": {
-                "": "system/modules/slick"
-            }
-        }
+  "name": "heimrichhannot/contao-slick",
+  "description": "Slick, a content slider for contao.",
+  "keywords": [
+    "contao",
+    "carousel",
+    "slider",
+    "slick"
+  ],
+  "type": "contao-module",
+  "homepage": "https://github.com/heimrichhannot/contao-slick",
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "Heimrich & Hannot",
+      "email": "digitales@heimrich-hannot.de",
+      "homepage": "http://www.heimrich-hannot.de",
+      "role": "Developer"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/heimrichhannot/contao-slick/issues"
+  },
+  "require": {
+    "php": "~5.4 || ~7.0",
+    "contao/core-bundle": "^3.5.1 || ~4.1",
+    "contao-community-alliance/composer-plugin": "~2.4 || ~3.0",
+    "menatwork/contao-multicolumnwizard": ">=2.10,<4",
+    "matthiasmullie/minify": "~1.3"
+  },
+  "autoload": {
+    "classmap": [
+      ""
+    ]
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "": "system/modules/slick"
+      }
+    }
+  }
 }
