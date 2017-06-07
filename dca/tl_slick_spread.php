@@ -86,7 +86,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 			'inputType'  => 'select',
 			'exclude'    => true,
 			'foreignKey' => 'tl_slick_config.title',
-			'sql'        => "int(10) unsigned NOT NULL",
+			'sql'        => "int(10) unsigned NOT NULL default '0'",
 			'eval'       => array('tl_class' => 'w50'),
 			'wizard'     => array
 			(
