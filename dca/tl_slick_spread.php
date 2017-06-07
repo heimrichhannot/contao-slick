@@ -244,7 +244,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
 				'includeBlankOption' => true,
 				'tl_class'           => 'w50',
 			),
-			'sql'              => "int(10) unsigned NOT NULL",
+			'sql'              => "int(10) unsigned NOT NULL default '0'",
 		),
 		'slick_prevArrow'        => array
 		(
