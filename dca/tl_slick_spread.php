@@ -121,7 +121,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_slick_spread']['slickMultiSRC'],
             'exclude'                 => true,
             'inputType'               => 'fileTree',
-            'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'orderField'=>'orderSRC', 'files'=>true, 'mandatory'=>true),
+            'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'orderField'=>'orderSRC', 'files'=>true, 'mandatory'=>true, 'isGallery' => true),
             'sql'                     => "blob NULL",
             'load_callback' => array
             (
