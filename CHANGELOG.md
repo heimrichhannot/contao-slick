@@ -1,7 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.3.9] - 2017-06-12
+## [1.3.10] - 2017-06-07
+
+### Fixed
+- `asNavFor` handling
+- PHP7 compatibility
+
+## [1.3.9] - 2017-06-07
 
 ### Changed
 - removed .idea folder
