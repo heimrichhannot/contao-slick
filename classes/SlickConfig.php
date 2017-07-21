@@ -140,7 +140,7 @@ class SlickConfig extends \Controller
 
     public static function getCssClassFromModel($objConfig)
     {
-        return static::getSlickCssClassFromModel($objConfig) . (strlen($objConfig->cssClass) > 0 ? ' ' . $objConfig->cssClass : '');
+        return static::getSlickCssClassFromModel($objConfig) . (strlen($objConfig->cssClass) > 0 ? ' ' . $objConfig->cssClass : '') . ' slick_uid_' . uniqid();
     }
 
 

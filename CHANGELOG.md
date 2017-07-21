@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.3.11] - 2017-07-21
+
+### Added
+- add `slick_uid_*` class to each slider with a unique identifier, required by multiple galleries for multiple sliders on one page  
+
 ## [1.3.10] - 2017-06-07
 
 ### Fixed
