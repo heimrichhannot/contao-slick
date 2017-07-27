@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2017-07-27
+
+### Changed
+
+- replaced multicolumneditor with `heimrichhannot/contao-multi_column_editor` and fixed responsive configuration handling for contao 4
+
 ## [1.3.11] - 2017-07-21
 
 ### Added
