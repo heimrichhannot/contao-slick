@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2017-07-27
+
+### Fixed
+
+- load required `tl_content` datacontainer, within `tl_slick_spread`
+
 ## [1.4.0] - 2017-07-27
 
 ### Changed
