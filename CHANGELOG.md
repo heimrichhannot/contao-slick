@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2017-07-27
+
+### Fixed
+
+- set default `galleryTpl` value to `slick_default`
+
 ## [1.4.1] - 2017-07-27
 
 ### Fixed

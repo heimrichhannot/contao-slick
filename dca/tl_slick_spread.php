@@ -173,6 +173,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
             'label'            => &$GLOBALS['TL_LANG']['tl_content']['galleryTpl'],
             'exclude'          => true,
             'inputType'        => 'select',
+            'default'          => 'slick_default',
             'options_callback' => ['tl_slick_spread', 'getGalleryTemplates'],
             'eval'             => ['tl_class' => 'w50'],
             'sql'              => "varchar(64) NOT NULL default ''",
