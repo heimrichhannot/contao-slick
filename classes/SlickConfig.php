@@ -205,7 +205,7 @@ class SlickConfig extends \Controller
                 $value = (bool) filter_var($value, FILTER_VALIDATE_BOOLEAN);
             }
 
-            if ($arrData['eval']['multiple'] || $arrData['inputType'] == 'multiColumnWizard')
+            if ($arrData['eval']['multiple'] || $arrData['inputType'] == 'multi_column_editor')
             {
                 $value = deserialize($value, true);
             }
@@ -224,7 +224,7 @@ class SlickConfig extends \Controller
             if ($key == 'slick_responsive')
             {
                 $arrResponsive = [];
-
+                
                 foreach ($value as $config)
                 {
                     if (empty($config['slick_settings']))
