@@ -205,7 +205,7 @@ class SlickConfig extends \Controller
                 $value = (bool) filter_var($value, FILTER_VALIDATE_BOOLEAN);
             }
 
-            if ($arrData['eval']['multiple'] || $arrData['inputType'] == 'multi_column_editor')
+            if ($arrData['eval']['multiple'] || $arrData['inputType'] == 'multiColumnEditor')
             {
                 $value = deserialize($value, true);
             }
