@@ -350,7 +350,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
                 'tl_class' => 'w50',
                 'rgxp'     => 'digit',
             ],
-            'sql'       => "float(9,2) unsigned NOT NULL default '0.00'",
+            'sql'       => "decimal(9,2) NOT NULL default '0.00'",
         ],
         'slick_fade'             => [
             'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_fade'],
