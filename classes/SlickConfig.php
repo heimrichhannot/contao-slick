@@ -51,7 +51,14 @@ class SlickConfig extends \Controller
         if (static::doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug))
         {
             $strChunk = $objT->parse();
-            $objFile->write($objT->parse());
+
+            if (!$objFile->write($objT->parse()))
+            {
+                \System::log('Unable to create slick config js file within assets/js, check file permissions!', __METHOD__, TL_ERROR);
+
+                return false;
+            }
+
             $objFile->close();
 
             // minify js
@@ -72,6 +79,11 @@ class SlickConfig extends \Controller
 
     public static function doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug)
     {
+        if (!file_exists(TL_ROOT . DIRECTORY_SEPARATOR . $objFile->value))
+        {
+            return true;
+        }
+
         $rewrite = $objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || ($cache && $objFileMinified == 0) || $debug;
 
         // do not check changes to responsive config, if parent config has been changed (performance)
@@ -224,7 +236,7 @@ class SlickConfig extends \Controller
             if ($key == 'slick_responsive')
             {
                 $arrResponsive = [];
-                
+
                 foreach ($value as $config)
                 {
                     if (empty($config['slick_settings']))
