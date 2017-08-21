@@ -45,7 +45,7 @@ class SlickConfig extends \Controller
 
         $objFile         = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
         $objFileMinified = new \File($strFileMinified, file_exists(TL_ROOT . '/' . $strFileMinified));
-        $minify          = $cache && class_exists('\MatthiasMullie\Minify\JS');
+        $minify          = class_exists('\MatthiasMullie\Minify\JS');
 
         // simple file caching
         if (static::doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug))
