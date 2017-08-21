@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.5] - 2017-08-21
+
+- removed `slick_shuffleOrder` (not working and not possible with `asNavFor`) and added `slick_randomActive`
+
 ## [1.4.4] - 2017-08-15
 
 ### Fixed

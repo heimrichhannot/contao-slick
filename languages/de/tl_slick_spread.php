@@ -80,7 +80,8 @@ $GLOBALS['TL_LANG']['tl_slick_spread']['slick_unslick'] = array('unslick', 'Slic
 $GLOBALS['TL_LANG']['tl_slick_spread']['initCallback'] = array('init callback', 'Geben sie eine global erreichbare Javascipt-Funktion an wie z.B. MySlick.initCallback um Zugriff auf den slick "init" callback zu erhalten, welcher vor der Inizialisierung des Slick Carousel aufgerufen werden muss. Standard: n/a');
 $GLOBALS['TL_LANG']['tl_slick_spread']['afterInitCallback'] = array('after init callback', 'Geben sie eine global erreichbare Javascipt-Funktion an wie z.B. MySlick.afterInitCallback die nach der Inizialisierung des Slick Carousel aufgerufen werden soll. Standard: n/a');
 $GLOBALS['TL_LANG']['tl_slick_spread']['cssClass'] = array('CSS-Klasse', 'Hier können Sie CSS-Klassen, durch Leerzeichen getrennt hinterlegen, die dem Slick-Karussell Elternelement hinzugefügt werden.');
-$GLOBALS['TL_LANG']['tl_slick_spread']['slick_shuffleOrder'] = array('Zufällige Reihenfolge aktivieren.', 'Elemente des Sliders werden in zufälliger Reihenfolge dargestellt.');
+$GLOBALS['TL_LANG']['tl_slick_spread']['slick_randomActive'] = array('Zufälliges aktives Element', 'Das aktive Element zufällig wählen.');
+
 /**
  * Legends
  */

@@ -84,7 +84,7 @@ class SlickConfig extends \Controller
             return true;
         }
 
-        $rewrite = $objConfig->tstamp > $objFile->mtime || $objFile->size == 0 || ($cache && $objFileMinified == 0) || $debug;
+        $rewrite = $objConfig->tstamp > ($objFile->mtime + 60) || $objFile->size == 0 || ($cache && $objFileMinified == 0) || $debug;
 
         // do not check changes to responsive config, if parent config has been changed (performance)
         if ($rewrite)
