@@ -26,10 +26,10 @@
 		} else {
 			el.addClass('slick-initialized');
 		}
-	};
+	}
 
 
-$(document).ready(function(){
+    $(document).ready(function(){
 		initSlick();
 	});
 

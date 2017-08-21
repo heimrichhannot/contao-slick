@@ -45,10 +45,10 @@ class SlickConfig extends \Controller
 
         $objFile         = new \File($strFile, file_exists(TL_ROOT . '/' . $strFile));
         $objFileMinified = new \File($strFileMinified, file_exists(TL_ROOT . '/' . $strFileMinified));
-        $minify          = class_exists('\MatthiasMullie\Minify\JS');
+        $minify          = class_exists('MatthiasMullie\Minify\JS');
 
         // simple file caching
-        if (static::doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug))
+        if (static::doRewrite($objConfig, $objFile, $objFileMinified, $minify, $debug))
         {
             $strChunk = $objT->parse();
 
@@ -74,17 +74,22 @@ class SlickConfig extends \Controller
 
         $GLOBALS['TL_JAVASCRIPT']['slick']             = 'system/modules/slick/assets/vendor/slick-carousel/slick/slick' . ($cache ? '.min.js|static' : '.js');
         $GLOBALS['TL_JAVASCRIPT']['slick-functions']   = 'system/modules/slick/assets/js/jquery.slick-functions' . ($cache ? '.min.js|static' : '.js');
-        $GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $minify ? ($strFileMinified . '|static') : $strFile;
+        $GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $cache ? ($strFileMinified . '|static') : $strFile;
     }
 
-    public static function doRewrite($objConfig, $objFile, $objFileMinified, $cache, $debug)
+    public static function doRewrite($objConfig, $objFile, $objFileMinified, $minify, $debug)
     {
         if (!file_exists(TL_ROOT . DIRECTORY_SEPARATOR . $objFile->value))
         {
             return true;
         }
 
-        $rewrite = $objConfig->tstamp > ($objFile->mtime + 60) || $objFile->size == 0 || ($cache && $objFileMinified == 0) || $debug;
+        if ($minify && !file_exists(TL_ROOT . DIRECTORY_SEPARATOR . $objFileMinified->value))
+        {
+            return true;
+        }
+
+        $rewrite = $objConfig->tstamp > ($objFile->mtime + 60) || $objFile->size == 0 || $debug;
 
         // do not check changes to responsive config, if parent config has been changed (performance)
         if ($rewrite)

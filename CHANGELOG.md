@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.7] - 2017-08-21
+
+### Fixed
+- minify js
+
 ## [1.4.6] - 2017-08-21
 
 ### Changed
