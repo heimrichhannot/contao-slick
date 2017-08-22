@@ -3,11 +3,11 @@
 <?php $this->block('content'); ?>
 
 
-  <?php if (empty($this->articles)): ?>
+<?php if (empty($this->articles)): ?>
     <p class="empty"><?php echo $this->empty; ?></p>
-  <?php else: ?>
+<?php else: ?>
     <?php echo implode('', $this->articles); ?>
     <?php echo $this->pagination; ?>
-  <?php endif; ?>
+<?php endif; ?>
 
 <?php $this->endblock(); ?>

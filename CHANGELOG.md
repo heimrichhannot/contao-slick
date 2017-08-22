@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.8] - 2017-08-22
+
+### Fixed
+- `tl_module.customTpl` options for modules `slick_newslist` and `slick_eventlist` 
+
 ## [1.4.7] - 2017-08-21
 
 ### Fixed
