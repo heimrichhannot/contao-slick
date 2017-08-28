@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.10] - 2017-08-28
+
+### Fixed
+- adjusted image meta data handling for contao 4
+
 ## [1.4.9] - 2017-08-28
 
 ### Changed
