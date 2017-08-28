@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.9] - 2017-08-28
+
+### Changed
+- renamed `news_full.html5` gallery template to `news_full_gallery.html5`
+
 ## [1.4.8] - 2017-08-22
 
 ### Fixed

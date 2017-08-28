@@ -67,7 +67,7 @@ TemplateLoader::addFiles(
         'mod_newslist'             => 'system/modules/slick/templates/modules',
         'mod_eventlist'            => 'system/modules/slick/templates/modules',
         'block_slick'              => 'system/modules/slick/templates/block',
-        'news_full'                => 'system/modules/slick/templates/news',
+        'news_full_gallery'        => 'system/modules/slick/templates/news',
         'slick_default'            => 'system/modules/slick/templates/gallery',
     ]
 );
