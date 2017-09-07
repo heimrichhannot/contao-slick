@@ -747,10 +747,8 @@ class tl_slick_spread extends Backend
     public function setFileTreeFlags($varValue, DataContainer $dc)
     {
 
-        if ($dc->activeRecord)
-        {
-            if ($dc->activeRecord->type == 'slick')
-            {
+        if ($dc->activeRecord) {
+            if ($dc->activeRecord->type == 'slick') {
                 $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['isGallery'] = true;
             }
         }
@@ -766,8 +764,8 @@ class tl_slick_spread extends Backend
                 specialchars($GLOBALS['TL_LANG']['tl_slick_spread']['editSlickConfig'][1]),
                 $dc->value
             ) . '" style="padding-left:3px" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(
-                  str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_slick_spread']['editSlickConfig'][1], $dc->value))
-              ) . '\',\'url\':this.href});return false">' . Image::getHtml(
+                str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_slick_spread']['editSlickConfig'][1], $dc->value))
+            ) . '\',\'url\':this.href});return false">' . Image::getHtml(
                 'alias.gif',
                 $GLOBALS['TL_LANG']['tl_slick_spread']['editSlickConfig'][0],
                 'style="vertical-align:top"'
@@ -780,13 +778,11 @@ class tl_slick_spread extends Backend
 
         $objConfig = \HeimrichHannot\Slick\SlickConfigModel::findBy(['id != ?'], $dc->activeRecord->id);
 
-        if ($objConfig === null)
-        {
+        if ($objConfig === null) {
             return $arrOptions;
         }
 
-        while ($objConfig->next())
-        {
+        while ($objConfig->next()) {
             $arrOptions[$objConfig->id] = $objConfig->title;
         }
 

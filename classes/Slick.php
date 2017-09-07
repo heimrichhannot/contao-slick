@@ -51,6 +51,65 @@ class Slick extends \Frontend
         $this->getFiles();
     }
 
+    protected function getFiles()
+    {
+        // Use the home directory of the current user as file source
+        if ($this->slickUseHomeDir && FE_USER_LOGGED_IN) {
+            $this->import('FrontendUser', 'User');
+
+            if ($this->User->assignDir && $this->User->homeDir) {
+                $this->slickMultiSRC = [$this->User->homeDir];
+            }
+        } else {
+            $this->slickMultiSRC = deserialize($this->slickMultiSRC);
+        }
+
+        // Return if there are no files
+        if (!is_array($this->slickMultiSRC) || empty($this->slickMultiSRC)) {
+            return '';
+        }
+
+        // Get the file entries from the database
+        $this->objFiles = \FilesModel::findMultipleByUuids($this->slickMultiSRC);
+
+        if ($this->objFiles === null) {
+            if (!\Validator::isUuid($this->slickMultiSRC[0])) {
+                return '<p class="error">' . $GLOBALS['TL_LANG']['ERR']['version2format'] . '</p>';
+            }
+
+            return '';
+        }
+    }
+
+    public static function createSettings(array $arrData = [], SlickConfigModel $objConfig)
+    {
+        \Controller::loadDataContainer('tl_slick_spread');
+
+        $objSettings = $objConfig;
+
+        foreach ($arrData as $key => $value) {
+            if (substr($key, 0, 5) != 'slick') {
+                continue;
+            }
+
+            $arrData = &$GLOBALS['TL_DCA']['tl_slick_spread']['fields'][$key];
+
+            if ($arrData['eval']['multiple'] || $key == 'slickOrderSRC') {
+                $value = deserialize($value, true);
+            }
+
+            $objSettings->{$key} = $value;
+        }
+
+        return $objSettings;
+    }
+
+    public function parse()
+    {
+        $this->Template->images = $this->getImages();
+
+        return $this->Template->parse();
+    }
 
     public function getImages()
     {
@@ -253,78 +312,6 @@ class Slick extends \Frontend
         return $image;
     }
 
-    public function parse()
-    {
-        $this->Template->images = $this->getImages();
-
-        return $this->Template->parse();
-    }
-
-    protected function getFiles()
-    {
-        // Use the home directory of the current user as file source
-        if ($this->slickUseHomeDir && FE_USER_LOGGED_IN) {
-            $this->import('FrontendUser', 'User');
-
-            if ($this->User->assignDir && $this->User->homeDir) {
-                $this->slickMultiSRC = [$this->User->homeDir];
-            }
-        } else {
-            $this->slickMultiSRC = deserialize($this->slickMultiSRC);
-        }
-
-        // Return if there are no files
-        if (!is_array($this->slickMultiSRC) || empty($this->slickMultiSRC)) {
-            return '';
-        }
-
-        // Get the file entries from the database
-        $this->objFiles = \FilesModel::findMultipleByUuids($this->slickMultiSRC);
-
-        if ($this->objFiles === null) {
-            if (!\Validator::isUuid($this->slickMultiSRC[0])) {
-                return '<p class="error">' . $GLOBALS['TL_LANG']['ERR']['version2format'] . '</p>';
-            }
-
-            return '';
-        }
-    }
-
-    public static function createSettings(array $arrData = [], SlickConfigModel $objConfig)
-    {
-        \Controller::loadDataContainer('tl_slick_spread');
-
-        $objSettings = $objConfig;
-
-        foreach ($arrData as $key => $value) {
-            if (substr($key, 0, 5) != 'slick') {
-                continue;
-            }
-
-            $arrData = &$GLOBALS['TL_DCA']['tl_slick_spread']['fields'][$key];
-
-            if ($arrData['eval']['multiple'] || $key == 'slickOrderSRC') {
-                $value = deserialize($value, true);
-            }
-
-            $objSettings->{$key} = $value;
-        }
-
-        return $objSettings;
-    }
-
-    /**
-     * Set an object property
-     *
-     * @param string
-     * @param mixed
-     */
-    public function __set($strKey, $varValue)
-    {
-        $this->arrData[$strKey] = $varValue;
-    }
-
-
     /**
      * Return an object property
      *
@@ -341,6 +328,16 @@ class Slick extends \Frontend
         return parent::__get($strKey);
     }
 
+    /**
+     * Set an object property
+     *
+     * @param string
+     * @param mixed
+     */
+    public function __set($strKey, $varValue)
+    {
+        $this->arrData[$strKey] = $varValue;
+    }
 
     /**
      * Check whether a property is set
@@ -354,4 +351,4 @@ class Slick extends \Frontend
         return isset($this->arrData[$strKey]);
     }
 
-} 
+}

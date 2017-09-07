@@ -15,22 +15,21 @@ namespace HeimrichHannot\Slick;
 class ContentSlickSlideStop extends \ContentElement
 {
 
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'ce_slick_slide_stop';
+    /**
+     * Template
+     * @var string
+     */
+    protected $strTemplate = 'ce_slick_slide_stop';
 
 
-	/**
-	 * Generate the content element
-	 */
-	protected function compile()
-	{
-		if (TL_MODE == 'BE')
-		{
-			$this->strTemplate = 'be_wildcard';
-			$this->Template = new \BackendTemplate($this->strTemplate);
-		}
-	}
+    /**
+     * Generate the content element
+     */
+    protected function compile()
+    {
+        if (TL_MODE == 'BE') {
+            $this->strTemplate = 'be_wildcard';
+            $this->Template    = new \BackendTemplate($this->strTemplate);
+        }
+    }
 }

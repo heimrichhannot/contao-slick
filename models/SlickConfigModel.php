@@ -14,6 +14,6 @@ namespace HeimrichHannot\Slick;
 class SlickConfigModel extends \Model
 {
 
-	protected static $strTable = 'tl_slick_config';
+    protected static $strTable = 'tl_slick_config';
 
 } 

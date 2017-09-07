@@ -11,20 +11,17 @@ class Hooks extends \Controller
     {
         global $objPage;
 
-        if (!$objPage)
-        {
+        if (!$objPage) {
             return $strBuffer;
         }
 
         $objConfigurations = SlickConfigModel::findAll();
 
-        if ($objConfigurations === null)
-        {
+        if ($objConfigurations === null) {
             return $strBuffer;
         }
 
-        while ($objConfigurations->next())
-        {
+        while ($objConfigurations->next()) {
             SlickConfig::createConfigJs($objConfigurations->current());
         }
 
@@ -34,22 +31,23 @@ class Hooks extends \Controller
 
     public function parseArticlesHook(&$objTemplate, $arrArticle, $objModule)
     {
-        if (!$arrArticle['addGallery'])
-        {
+        if (!$arrArticle['addGallery']) {
             return;
         }
 
         $objArchive = \NewsArchiveModel::findByPk($arrArticle['pid']);
 
-        if ($objArchive === null)
-        {
+        if ($objArchive === null) {
+            return;
+        }
+
+        if (!$objArchive->slickConfig) {
             return;
         }
 
         $objConfig = SlickConfigModel::findByPk($objArchive->slickConfig);
 
-        if ($objConfig === null)
-        {
+        if ($objConfig === null) {
             return;
         }
 
@@ -71,34 +69,32 @@ class Hooks extends \Controller
      */
     public function loadDataContainerHook($strName)
     {
-        if (!is_array($GLOBALS['TL_SLICK']['SUPPORTED']) || !in_array($strName, array_keys($GLOBALS['TL_SLICK']['SUPPORTED'])))
-        {
+        if (!is_array($GLOBALS['TL_SLICK']['SUPPORTED']) || !in_array($strName, array_keys($GLOBALS['TL_SLICK']['SUPPORTED']))) {
             return false;
         }
 
         \Controller::loadDataContainer(static::$strSpreadDca);
 
-        if (!is_array($GLOBALS['TL_DCA'][static::$strSpreadDca]['fields']))
-        {
+        if (!is_array($GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'])) {
             return false;
         }
 
         $dc = &$GLOBALS['TL_DCA'][$strName];
 
-        if($dc === null) return;
+        if ($dc === null) {
+            return;
+        }
 
-        foreach ($GLOBALS['TL_SLICK']['SUPPORTED'][$strName] as $strPalette => $replace)
-        {
+        foreach ($GLOBALS['TL_SLICK']['SUPPORTED'][$strName] as $strPalette => $replace) {
 
-            $arrFields    = array();
-            $arrFieldKeys = array();
-            $arrSelectors = array();
-            $arrSubFields = array();
+            $arrFields    = [];
+            $arrFieldKeys = [];
+            $arrSelectors = [];
+            $arrSubFields = [];
 
             preg_match_all('#\[\[(?P<constant>.+)\]\]#', $replace, $matches);
 
-            if (!isset($matches['constant'][0]))
-            {
+            if (!isset($matches['constant'][0])) {
                 continue;
             }
 
@@ -109,12 +105,10 @@ class Hooks extends \Controller
             $search = str_replace('[[' . $strConstant . ']]', '', $replace);
 
             // prepend slick config palette
-            if ($pos < 1)
-            {
+            if ($pos < 1) {
                 $replace = $GLOBALS['TL_DCA'][static::$strSpreadDca]['palettes'][$strReplacePalette] . $search;
             } // append slick config palette
-            else
-            {
+            else {
                 $replace = $search . $GLOBALS['TL_DCA'][static::$strSpreadDca]['palettes'][$strReplacePalette];
             }
 
@@ -124,14 +118,11 @@ class Hooks extends \Controller
 
             // inject palettes
             // create palette if not existing
-            if (!isset($dc['palettes'][$strPalette]))
-            {
+            if (!isset($dc['palettes'][$strPalette])) {
                 $dc['palettes'][$strPalette] = $replace;
-            } else
-            {
+            } else {
                 // do not replace multiple times
-                if(!$replace || strpos($dc['palettes'][$strPalette], $replace) !== false)
-                {
+                if (!$replace || strpos($dc['palettes'][$strPalette], $replace) !== false) {
                     continue;
                 }
 
@@ -141,35 +132,31 @@ class Hooks extends \Controller
             // inject subplattes & selectors
             $arrSelectors = array_intersect($GLOBALS['TL_DCA'][static::$strSpreadDca]['palettes']['__selector__'], $arrFieldKeys);
 
-            if (!empty($arrSelectors))
-            {
-                $dc['palettes']['__selector__'] = array_merge(is_array($dc['palettes']['__selector__']) ? $dc['palettes']['__selector__'] : array(), $arrSelectors);
+            if (!empty($arrSelectors)) {
+                $dc['palettes']['__selector__'] = array_merge(is_array($dc['palettes']['__selector__']) ? $dc['palettes']['__selector__'] : [], $arrSelectors);
 
-                foreach ($arrSelectors as $key)
-                {
+                foreach ($arrSelectors as $key) {
                     $arrFields = array_merge($arrFields, static::getPaletteFields($key, $dc, 'subpalettes'));
 
                 }
 
-                $dc['subpalettes'] = array_merge(is_array($dc['subpalettes']) ? $dc['subpalettes'] : array(), $GLOBALS['TL_DCA'][static::$strSpreadDca]['subpalettes']);
+                $dc['subpalettes'] = array_merge(is_array($dc['subpalettes']) ? $dc['subpalettes'] : [], $GLOBALS['TL_DCA'][static::$strSpreadDca]['subpalettes']);
             }
 
-            if (!is_array($arrFields))
-            {
+            if (!is_array($arrFields)) {
                 return;
             }
 
             // inject fields
-            $dc['fields'] = array_merge($arrFields, (is_array($dc['fields']) ? $dc['fields'] : array()));
+            $dc['fields'] = array_merge($arrFields, (is_array($dc['fields']) ? $dc['fields'] : []));
         }
 
         \System::loadLanguageFile(static::$strSpreadDca);
         \System::loadLanguageFile($strName);
 
         // add language to TL_LANG palette
-        if(is_array($GLOBALS['TL_LANG'][static::$strSpreadDca]))
-        {
-            $GLOBALS['TL_LANG'][$strName] = array_merge(is_array($GLOBALS['TL_LANG'][$strName]) ? $GLOBALS['TL_LANG'][$strName] : array(), $GLOBALS['TL_LANG'][static::$strSpreadDca]);
+        if (is_array($GLOBALS['TL_LANG'][static::$strSpreadDca])) {
+            $GLOBALS['TL_LANG'][$strName] = array_merge(is_array($GLOBALS['TL_LANG'][$strName]) ? $GLOBALS['TL_LANG'][$strName] : [], $GLOBALS['TL_LANG'][static::$strSpreadDca]);
         }
     }
 
@@ -177,38 +164,28 @@ class Hooks extends \Controller
     {
         $boxes = trimsplit(';', $GLOBALS['TL_DCA'][static::$strSpreadDca][$type][$strPalette]);
 
-        $arrFields = array();
+        $arrFields = [];
 
-        if (!empty($boxes))
-        {
-            foreach ($boxes as $k => $v)
-            {
+        if (!empty($boxes)) {
+            foreach ($boxes as $k => $v) {
                 $eCount    = 1;
                 $boxes[$k] = trimsplit(',', $v);
 
-                foreach ($boxes[$k] as $kk => $vv)
-                {
-                    if (preg_match('/^\[.*\]$/', $vv))
-                    {
+                foreach ($boxes[$k] as $kk => $vv) {
+                    if (preg_match('/^\[.*\]$/', $vv)) {
                         ++$eCount;
                         continue;
                     }
 
-                    if (preg_match('/^\{.*\}$/', $vv))
-                    {
+                    if (preg_match('/^\{.*\}$/', $vv)) {
                         unset($boxes[$k][$kk]);
-                    } else
-                    {
-                        if (isset($GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'][$vv]))
-                        {
+                    } else {
+                        if (isset($GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'][$vv])) {
                             $arrField = $GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'][$vv];
-                        } else
-                        {
-                            if (isset($dc['fields'][$vv]))
-                            {
+                        } else {
+                            if (isset($dc['fields'][$vv])) {
                                 $arrField = $dc['fields'][$vv];
-                            } else
-                            {
+                            } else {
                                 continue;
                             }
                         }
@@ -216,8 +193,7 @@ class Hooks extends \Controller
                         $arrFields[$vv] = $arrField;
 
                         // orderSRC support
-                        if (isset($arrField['eval']['orderField']))
-                        {
+                        if (isset($arrField['eval']['orderField'])) {
                             $arrFields[$arrField['eval']['orderField']] = $GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'][$arrField['eval']['orderField']];
                         }
                     }
@@ -225,8 +201,7 @@ class Hooks extends \Controller
             }
 
             // Unset a box if it does not contain any fields
-            if (count($boxes[$k]) < $eCount)
-            {
+            if (count($boxes[$k]) < $eCount) {
                 unset($boxes[$k]);
             }
         }

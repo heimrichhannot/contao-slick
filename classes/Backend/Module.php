@@ -22,21 +22,18 @@ class Module extends \Contao\Backend
     {
         $objModule = \ModuleModel::findByPk($dc->id);
 
-        if ($objModule === null)
-        {
+        if ($objModule === null) {
             return;
         }
 
         $dca = &$GLOBALS['TL_DCA']['tl_module'];
 
-        if ($objModule->type == 'slick_newslist')
-        {
+        if ($objModule->type == 'slick_newslist') {
             $dca['fields']['customTpl']['options'] = $this->getTemplateGroup('mod_newslist');
             unset($dca['fields']['customTpl']['options_callback']);
         }
 
-        if ($objModule->type == 'slick_eventlist')
-        {
+        if ($objModule->type == 'slick_eventlist') {
             $dca['fields']['customTpl']['options'] = $this->getTemplateGroup('mod_eventlist');
             unset($dca['fields']['customTpl']['options_callback']);
         }

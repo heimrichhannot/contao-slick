@@ -13,10 +13,10 @@ namespace HeimrichHannot\Slick;
 
 class SlickUpdater
 {
-	public static function run()
-	{
-		$objDatabase = \Database::getInstance();
+    public static function run()
+    {
+        $objDatabase = \Database::getInstance();
 
-		return;
-	}
+        return;
+    }
 } 

@@ -14,41 +14,53 @@ namespace HeimrichHannot\Slick;
 class ContentSlickNavStart extends \ContentElement
 {
 
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'ce_slick_nav_start';
+    /**
+     * Template
+     * @var string
+     */
+    protected $strTemplate = 'ce_slick_nav_start';
 
 
-	public function generate()
-	{
-		if (TL_MODE == 'BE')
-		{
-			$this->strTemplate = 'be_wildcard';
-			$this->Template = new \BackendTemplate($this->strTemplate);
-			$this->Template->title = $this->headline;
-		}
+    public function generate()
+    {
+        if (TL_MODE == 'BE') {
+            $this->strTemplate     = 'be_wildcard';
+            $this->Template        = new \BackendTemplate($this->strTemplate);
+            $this->Template->title = $this->headline;
+        }
 
-		parent::generate();
+        parent::generate();
 
-		$objConfig = SlickConfigModel::findByPk($this->slickConfig);
+        if (!$this->slickConfig) {
+            return '';
+        }
 
-		if ($objConfig === null) return;
+        $objConfig = SlickConfigModel::findByPk($this->slickConfig);
 
-		$objSlider = \ContentModel::findByPk($this->slickContentSlider);
-
-		if($objSlider === null) return;
-
-		$this->Template->class .= ' slick-nav ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick';
-		$this->Template->syncTo = SlickConfig::getCssClassForContent($this->slickContentSlider);
+        if ($objConfig === null) {
+            return '';
+        }
 
 
-		return $this->Template->parse();
-	}
+        if (!$this->slickContentSlider) {
+            return '';
+        }
 
-	/**
-	 * Generate the content element
-	 */
-	protected function compile(){}
+        if (($objSlider = \ContentModel::findByPk($this->slickContentSlider)) === null) {
+            return '';
+        }
+
+        $this->Template->class  .= ' slick-nav ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick';
+        $this->Template->syncTo = SlickConfig::getCssClassForContent($this->slickContentSlider);
+
+
+        return $this->Template->parse();
+    }
+
+    /**
+     * Generate the content element
+     */
+    protected function compile()
+    {
+    }
 }

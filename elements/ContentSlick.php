@@ -12,45 +12,50 @@ namespace HeimrichHannot\Slick;
 
 class ContentSlick extends \ContentGallery
 {
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'ce_slick';
+    /**
+     * Template
+     * @var string
+     */
+    protected $strTemplate = 'ce_slick';
 
-	/**
-	 * Return if there are no files
-	 * @return string
-	 */
-	public function generate()
-	{
-		// show gallery instead of slickcarousel in backend mode
-		if (TL_MODE == 'BE')
-		{
-			return parent::generate();
-		}
+    /**
+     * Return if there are no files
+     * @return string
+     */
+    public function generate()
+    {
+        // show gallery instead of slickcarousel in backend mode
+        if (TL_MODE == 'BE') {
+            return parent::generate();
+        }
 
-		parent::generate();
+        parent::generate();
 
-		$objConfig = SlickConfigModel::findByPk($this->slickConfig);
+        if (!$this->slickConfig) {
+            return '';
+        }
 
-		if ($objConfig === null) return;
+        $objConfig = SlickConfigModel::findByPk($this->slickConfig);
 
-		// Map content fields to slick fields
-		$this->arrData['slickMultiSRC']      = $this->arrData['multiSRC'];
-		$this->arrData['slickOrderSRC']      = $this->arrData['orderSRC'];
-		$this->arrData['slickSortBy']        = $this->arrData['sortBy'];
-		$this->arrData['slickUseHomeDir']    = $this->arrData['useHomeDir'];
-		$this->arrData['slickSize']          = $this->arrData['size'];
-		$this->arrData['slickFullsize']      = $this->arrData['fullsize'];
-		$this->arrData['slickNumberOfItems'] = $this->arrData['numberOfItems'];
-		$this->arrData['slickCustomTpl']     = $this->arrData['customTpl'];
+        if ($objConfig === null) {
+            return '';
+        }
 
-		$objGallery = new Slick(Slick::createSettings($this->arrData, $objConfig));
+        // Map content fields to slick fields
+        $this->arrData['slickMultiSRC']      = $this->arrData['multiSRC'];
+        $this->arrData['slickOrderSRC']      = $this->arrData['orderSRC'];
+        $this->arrData['slickSortBy']        = $this->arrData['sortBy'];
+        $this->arrData['slickUseHomeDir']    = $this->arrData['useHomeDir'];
+        $this->arrData['slickSize']          = $this->arrData['size'];
+        $this->arrData['slickFullsize']      = $this->arrData['fullsize'];
+        $this->arrData['slickNumberOfItems'] = $this->arrData['numberOfItems'];
+        $this->arrData['slickCustomTpl']     = $this->arrData['customTpl'];
 
-		$this->Template->class .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick';
-		$this->Template->images = $objGallery->getImages();
+        $objGallery = new Slick(Slick::createSettings($this->arrData, $objConfig));
 
-		return $this->Template->parse();
-	}
+        $this->Template->class  .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick';
+        $this->Template->images = $objGallery->getImages();
+
+        return $this->Template->parse();
+    }
 }

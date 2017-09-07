@@ -26,46 +26,48 @@ $dc['palettes']['slick-nav-stop']  = '{type_legend},type,headline;{template_lege
 $dc['palettes']['slick-slide-separator'] = '{type_legend},type,headline;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $dc['palettes']['slick-nav-separator']   = '{type_legend},type,headline;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
-$dc['fields']['slickContentSlider'] = array
-(
-	'label'            => &$GLOBALS['TL_LANG']['tl_content']['slickContentSlider'],
-	'exclude'          => true,
-	'inputType'        => 'select',
-	'options_callback' => array('tl_content_slick', 'getContentSliderCarousels'),
-	'eval'             => array('tl_class' => 'w50', 'mandatory' => true),
-	'wizard' => array
-	(
-		array('tl_content', 'editAlias')
-	),
-	'sql'              => "varchar(64) NOT NULL default ''",
-);
+$dc['fields']['slickContentSlider'] = [
+    'label'            => &$GLOBALS['TL_LANG']['tl_content']['slickContentSlider'],
+    'exclude'          => true,
+    'inputType'        => 'select',
+    'options_callback' => ['tl_content_slick', 'getContentSliderCarousels'],
+    'eval'             => ['tl_class' => 'w50', 'mandatory' => true],
+    'wizard'           => [
+        ['tl_content', 'editAlias']
+    ],
+    'sql'              => "varchar(64) NOT NULL default ''",
+];
 
 class tl_content_slick extends \Backend
 {
 
-	public function getContentSliderCarousels(DataContainer $dc)
-	{
-		$arrOptions = array();
+    public function getContentSliderCarousels(DataContainer $dc)
+    {
+        $arrOptions = [];
 
-		$objSlider = \ContentModel::findBy('type', 'slick-content-start');
+        $objSlider = \ContentModel::findBy('type', 'slick-content-start');
 
-		if ($objSlider === null) return $arrOptions;
+        if ($objSlider === null) {
+            return $arrOptions;
+        }
 
-		while ($objSlider->next()) {
+        while ($objSlider->next()) {
 
-			$objArticle = \ArticleModel::findByPk($objSlider->pid);
+            $objArticle = \ArticleModel::findByPk($objSlider->pid);
 
-			if ($objArticle === null) continue;
+            if ($objArticle === null) {
+                continue;
+            }
 
-			$arrOptions[$objSlider->id] = sprintf($GLOBALS['TL_LANG']['tl_content']['contentSliderCarouselSelectOption'],
-				$objArticle->title,
-				$objArticle->id,
-				$objSlider->id);
+            $arrOptions[$objSlider->id] = sprintf($GLOBALS['TL_LANG']['tl_content']['contentSliderCarouselSelectOption'],
+                $objArticle->title,
+                $objArticle->id,
+                $objSlider->id);
 
-		}
+        }
 
 
-		return $arrOptions;
-	}
+        return $arrOptions;
+    }
 
 }

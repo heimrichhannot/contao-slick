@@ -1,4 +1,3 @@
-
 <?php $this->extend('block_slick'); ?>
 
 <?php $this->block('content'); ?>

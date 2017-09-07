@@ -1,7 +1,7 @@
 <?php
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (c) 2015 Heimrich & Hannot GmbH
  * @package slick
  * @author Rico Kaltofen <r.kaltofen@heimrich-hannot.de>
@@ -13,36 +13,43 @@ namespace HeimrichHannot\Slick;
 class ContentSlickContentStart extends \ContentElement
 {
 
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'ce_slick_content_start';
+    /**
+     * Template
+     * @var string
+     */
+    protected $strTemplate = 'ce_slick_content_start';
 
 
-	public function generate()
-	{
-		if (TL_MODE == 'BE')
-		{
-			$this->strTemplate = 'be_wildcard';
-			$this->Template = new \BackendTemplate($this->strTemplate);
-			$this->Template->title = $this->headline;
-		}
+    public function generate()
+    {
+        if (TL_MODE == 'BE') {
+            $this->strTemplate     = 'be_wildcard';
+            $this->Template        = new \BackendTemplate($this->strTemplate);
+            $this->Template->title = $this->headline;
+        }
 
-		parent::generate();
+        parent::generate();
 
-		$objConfig = SlickConfigModel::findByPk($this->slickConfig);
+        if (!$this->slickConfig) {
+            return '';
+        }
 
-		if ($objConfig === null) return;
+        $objConfig = SlickConfigModel::findByPk($this->slickConfig);
 
-		$this->Template->class .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick ' . SlickConfig::getCssClassForContent($this->id);
-		$this->Template->syncid = SlickConfig::getCssClassForContent($this->id);
+        if ($objConfig === null) {
+            return '';
+        }
 
-		return $this->Template->parse();
-	}
+        $this->Template->class  .= ' ' . SlickConfig::getCssClassFromModel($objConfig) . ' slick ' . SlickConfig::getCssClassForContent($this->id);
+        $this->Template->syncid = SlickConfig::getCssClassForContent($this->id);
 
-	/**
-	 * Generate the content element
-	 */
-	protected function compile(){}
+        return $this->Template->parse();
+    }
+
+    /**
+     * Generate the content element
+     */
+    protected function compile()
+    {
+    }
 }

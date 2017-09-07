@@ -1,40 +1,40 @@
 (function($){
-	function initSlick(){
-		var el = $('<?= $this->selector;?>'),
-            total = el.children().length;
+function initSlick(){
+var el = $('<?= $this->selector; ?>'),
+total = el.children().length;
 
-		<?php if($this->initCallback) : ?>
-			// init callback must be triggered befor slick carousel is created (see #1005)
-			if (typeof <?= $this->initCallback; ?> == 'function') <?= $this->initCallback; ?> (el);
-		<?php endif; ?>
+<?php if ($this->initCallback) : ?>
+    // init callback must be triggered befor slick carousel is created (see #1005)
+    if (typeof <?= $this->initCallback; ?> == 'function') <?= $this->initCallback; ?> (el);
+<?php endif; ?>
 
-		// initialize slick, if more than one slide
-		if(total > 1){
+// initialize slick, if more than one slide
+if(total > 1){
 
-            var config = {<?= $this->config;?>};
+var config = {<?= $this->config; ?>};
 
-			var slick = el.slick(config);
+var slick = el.slick(config);
 
-            <?php if($this->randomActive): ?>
-            slick.slick('slickGoTo', Math.floor( Math.random() * total), true);
-            <?php endif; ?>
+<?php if ($this->randomActive): ?>
+    slick.slick('slickGoTo', Math.floor( Math.random() * total), true);
+<?php endif; ?>
 
-			<?php if($this->afterInitCallback) : ?>
-            if (typeof <?= $this->afterInitCallback; ?> == 'function') <?= $this->afterInitCallback; ?> (slick, el);
-			<?php endif; ?>
-		// add slick-initialized for non-slick sliders, otherwise the will stay invisible
-		} else {
-			el.addClass('slick-initialized');
-		}
-	}
+<?php if ($this->afterInitCallback) : ?>
+    if (typeof <?= $this->afterInitCallback; ?> == 'function') <?= $this->afterInitCallback; ?> (slick, el);
+<?php endif; ?>
+// add slick-initialized for non-slick sliders, otherwise the will stay invisible
+} else {
+el.addClass('slick-initialized');
+}
+}
 
 
-    $(document).ready(function(){
-		initSlick();
-	});
+$(document).ready(function(){
+initSlick();
+});
 
-	$(document).on('shown.bs.modal', '.modal', function(){
-		initSlick();
-	});
+$(document).on('shown.bs.modal', '.modal', function(){
+initSlick();
+});
 
 })(jQuery);

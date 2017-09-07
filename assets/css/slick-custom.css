@@ -1,7 +1,7 @@
-.slick-container{
-	visibility: hidden;
+.slick-container {
+    visibility: hidden;
 }
 
-.slick-initialized{
-	visibility: visible;
+.slick-initialized {
+    visibility: visible;
 }

@@ -15,8 +15,7 @@ class SlickConfig extends \Controller
 {
     public static function createConfigJs($objConfig, $debug = false)
     {
-        if (!static::isJQueryEnabled())
-        {
+        if (!static::isJQueryEnabled()) {
             return false;
         }
 
@@ -30,13 +29,11 @@ class SlickConfig extends \Controller
         $objT->selector     = static::getSlickContainerSelectorFromModel($objConfig);
         $objT->wrapperClass = static::getSlickCssClassFromModel($objConfig);
 
-        if ($objConfig->initCallback)
-        {
+        if ($objConfig->initCallback) {
             $objT->initCallback = $objConfig->initCallback;
         }
 
-        if ($objConfig->afterInitCallback)
-        {
+        if ($objConfig->afterInitCallback) {
             $objT->afterInitCallback = $objConfig->afterInitCallback;
         }
 
@@ -48,12 +45,10 @@ class SlickConfig extends \Controller
         $minify          = class_exists('MatthiasMullie\Minify\JS');
 
         // simple file caching
-        if (static::doRewrite($objConfig, $objFile, $objFileMinified, $minify, $debug))
-        {
+        if (static::doRewrite($objConfig, $objFile, $objFileMinified, $minify, $debug)) {
             $strChunk = $objT->parse();
 
-            if (!$objFile->write($objT->parse()))
-            {
+            if (!$objFile->write($objT->parse())) {
                 \System::log('Unable to create slick config js file within assets/js, check file permissions!', __METHOD__, TL_ERROR);
 
                 return false;
@@ -62,8 +57,7 @@ class SlickConfig extends \Controller
             $objFile->close();
 
             // minify js
-            if ($minify)
-            {
+            if ($minify) {
                 $objFileMinified = new \File($strFileMinified);
                 $objMinify       = new \MatthiasMullie\Minify\JS();
                 $objMinify->add($strChunk);
@@ -75,55 +69,6 @@ class SlickConfig extends \Controller
         $GLOBALS['TL_JAVASCRIPT']['slick']             = 'system/modules/slick/assets/vendor/slick-carousel/slick/slick' . ($cache ? '.min.js|static' : '.js');
         $GLOBALS['TL_JAVASCRIPT']['slick-functions']   = 'system/modules/slick/assets/js/jquery.slick-functions' . ($cache ? '.min.js|static' : '.js');
         $GLOBALS['TL_JAVASCRIPT'][$objT->wrapperClass] = $cache ? ($strFileMinified . '|static') : $strFile;
-    }
-
-    public static function doRewrite($objConfig, $objFile, $objFileMinified, $minify, $debug)
-    {
-        if (!file_exists(TL_ROOT . DIRECTORY_SEPARATOR . $objFile->value))
-        {
-            return true;
-        }
-
-        if ($minify && !file_exists(TL_ROOT . DIRECTORY_SEPARATOR . $objFileMinified->value))
-        {
-            return true;
-        }
-
-        $rewrite = $objConfig->tstamp > ($objFile->mtime + 60) || $objFile->size == 0 || $debug;
-
-        // do not check changes to responsive config, if parent config has been changed (performance)
-        if ($rewrite)
-        {
-            return $rewrite;
-        }
-
-        $arrResponsive = deserialize($objConfig->slick_responsive, true);
-
-        if (!empty($arrResponsive))
-        {
-            foreach ($arrResponsive as $config)
-            {
-                if (empty($config['slick_settings']))
-                {
-                    continue;
-                }
-
-                $objResponsiveConfig = SlickConfigModel::findByPk($config['slick_settings']);
-
-                if ($objResponsiveConfig === null)
-                {
-                    continue;
-                }
-
-                if ($objResponsiveConfig->tstamp > $objFile->mtime)
-                {
-                    $rewrite = true;
-                    break;
-                }
-            }
-        }
-
-        return $rewrite;
     }
 
     public static function isJQueryEnabled()
@@ -138,9 +83,111 @@ class SlickConfig extends \Controller
         return $objLayout->addJQuery;
     }
 
-    public static function getCssClassForContent($id)
+    public static function createConfig($objConfig)
     {
-        return 'slick-content-' . $id;
+        \Controller::loadDataContainer('tl_slick_spread');
+
+        $arrConfig  = [];
+        $arrObjects = [];
+
+        foreach ($objConfig->row() as $key => $value) {
+            if (strstr($key, 'slick_') === false) {
+                continue;
+            }
+
+            if (!isset($GLOBALS['TL_DCA']['tl_slick_spread']['fields'][$key])) {
+                continue;
+            }
+
+            $arrData = $GLOBALS['TL_DCA']['tl_slick_spread']['fields'][$key];
+
+            $slickKey = substr($key, 6); // trim slick_ prefix
+
+            if ($arrData['eval']['rgxp'] == 'digit') {
+                $value = intval($value);
+            }
+
+            if ($arrData['inputType'] == 'checkbox' && !$arrData['eval']['multiple']) {
+                $value = (bool)filter_var($value, FILTER_VALIDATE_BOOLEAN);
+            }
+
+            if ($arrData['eval']['multiple'] || $arrData['inputType'] == 'multiColumnEditor') {
+                $value = deserialize($value, true);
+            }
+
+            if ($arrData['eval']['isJsObject']) {
+                $arrObjects[] = $slickKey;
+            }
+
+            // check type as well, otherwise
+            if ($value === '') {
+                continue;
+            }
+
+            if ($key == 'slick_responsive') {
+                $arrResponsive = [];
+
+                foreach ($value as $config) {
+                    if (empty($config['slick_settings'])) {
+                        continue;
+                    }
+
+                    $objResponsiveConfig = SlickConfigModel::findByPk($config['slick_settings']);
+
+                    if ($objResponsiveConfig === null) {
+                        continue;
+                    }
+
+                    $config['breakpoint'] = $config['slick_breakpoint'];
+                    unset($config['slick_breakpoint']);
+
+                    $settings = static::createConfig($objResponsiveConfig);
+
+                    if ($settings['config']['unslick']) {
+                        $config['settings'] = 'unslick';
+                    } else {
+                        $config['settings'] = $settings['config'];
+                    }
+
+                    unset($config['slick_settings']);
+
+
+                    $arrResponsive[] = $config;
+                }
+
+                if (empty($arrResponsive)) {
+                    $value = false;
+                } else {
+                    $value = $arrResponsive;
+                }
+            }
+
+            if ($key == 'slick_asNavFor' && $value > 0) {
+                $objTargetConfig = SlickConfigModel::findByPk($value);
+
+                if ($objTargetConfig !== null) {
+                    $value = static::getSlickContainerSelectorFromModel($objTargetConfig);
+                } else {
+                    $value = null; // should be null by default
+                }
+            }
+
+            if ($key) {
+                $arrConfig[$slickKey] = $value;
+            }
+        }
+
+        // remove responsive settings, otherwise center wont work
+        if (empty($arrResponsive)) {
+            unset($arrConfig['responsive']);
+        }
+
+        $arrReturn = [
+            'config'  => $arrConfig,
+            'objects' => $arrObjects,
+        ];
+
+        return $arrReturn;
     }
 
     public static function getSlickContainerSelectorFromModel($objConfig)
@@ -155,11 +202,16 @@ class SlickConfig extends \Controller
         return 'slick_' . substr(md5($strClass . '_' . $objConfig->id), 0, 6);
     }
 
-    public static function getCssClassFromModel($objConfig)
+    public static function stripNamespaceFromClassName($obj)
     {
-        return static::getSlickCssClassFromModel($objConfig) . (strlen($objConfig->cssClass) > 0 ? ' ' . $objConfig->cssClass : '') . ' slick_uid_' . uniqid();
-    }
+        $classname = get_class($obj);
 
+        if (preg_match('@\\\\([\w]+)$@', $classname, $matches)) {
+            $classname = $matches[1];
+        }
+
+        return $classname;
+    }
 
     public static function createConfigJSON($objConfig)
     {
@@ -167,17 +219,14 @@ class SlickConfig extends \Controller
 
         $strJson = '';
 
-        if (!is_array($arrConfig['config']))
-        {
+        if (!is_array($arrConfig['config'])) {
             return $strJson;
         }
 
         $strJson = json_encode($arrConfig['config']);
 
-        if (is_array($arrConfig['objects']))
-        {
-            foreach ($arrConfig['objects'] as $key)
-            {
+        if (is_array($arrConfig['objects'])) {
+            foreach ($arrConfig['objects'] as $key) {
                 // remove quotes from callbacks
                 $strJson = preg_replace('#"' . $key . '":"(.+?)"#', '"' . $key . '":$1', $strJson);
             }
@@ -189,148 +238,55 @@ class SlickConfig extends \Controller
         return $strJson;
     }
 
-    public static function createConfig($objConfig)
+    public static function doRewrite($objConfig, $objFile, $objFileMinified, $minify, $debug)
     {
-        \Controller::loadDataContainer('tl_slick_spread');
+        if (!file_exists(TL_ROOT . DIRECTORY_SEPARATOR . $objFile->value)) {
+            return true;
+        }
 
-        $arrConfig  = [];
-        $arrObjects = [];
+        if ($minify && !file_exists(TL_ROOT . DIRECTORY_SEPARATOR . $objFileMinified->value)) {
+            return true;
+        }
 
-        foreach ($objConfig->row() as $key => $value)
-        {
-            if (strstr($key, 'slick_') === false)
-            {
-                continue;
-            }
+        $rewrite = $objConfig->tstamp > ($objFile->mtime + 60) || $objFile->size == 0 || $debug;
 
-            if (!isset($GLOBALS['TL_DCA']['tl_slick_spread']['fields'][$key]))
-            {
-                continue;
-            }
+        // do not check changes to responsive config, if parent config has been changed (performance)
+        if ($rewrite) {
+            return $rewrite;
+        }
 
-            $arrData = $GLOBALS['TL_DCA']['tl_slick_spread']['fields'][$key];
+        $arrResponsive = deserialize($objConfig->slick_responsive, true);
 
-            $slickKey = substr($key, 6); // trim slick_ prefix
-
-            if ($arrData['eval']['rgxp'] == 'digit')
-            {
-                $value = intval($value);
-            }
-
-            if ($arrData['inputType'] == 'checkbox' && !$arrData['eval']['multiple'])
-            {
-                $value = (bool) filter_var($value, FILTER_VALIDATE_BOOLEAN);
-            }
-
-            if ($arrData['eval']['multiple'] || $arrData['inputType'] == 'multiColumnEditor')
-            {
-                $value = deserialize($value, true);
-            }
-
-            if ($arrData['eval']['isJsObject'])
-            {
-                $arrObjects[] = $slickKey;
-            }
-
-            // check type as well, otherwise
-            if ($value === '')
-            {
-                continue;
-            }
-
-            if ($key == 'slick_responsive')
-            {
-                $arrResponsive = [];
-
-                foreach ($value as $config)
-                {
-                    if (empty($config['slick_settings']))
-                    {
-                        continue;
-                    }
-
-                    $objResponsiveConfig = SlickConfigModel::findByPk($config['slick_settings']);
-
-                    if ($objResponsiveConfig === null)
-                    {
-                        continue;
-                    }
-
-                    $config['breakpoint'] = $config['slick_breakpoint'];
-                    unset($config['slick_breakpoint']);
-
-                    $settings = static::createConfig($objResponsiveConfig);
-
-                    if ($settings['config']['unslick'])
-                    {
-                        $config['settings'] = 'unslick';
-                    }
-                    else
-                    {
-                        $config['settings'] = $settings['config'];
-                    }
-
-                    unset($config['slick_settings']);
-
-
-                    $arrResponsive[] = $config;
+        if (!empty($arrResponsive)) {
+            foreach ($arrResponsive as $config) {
+                if (empty($config['slick_settings'])) {
+                    continue;
                 }
 
-                if (empty($arrResponsive))
-                {
-                    $value = false;
-                }
-                else
-                {
-                    $value = $arrResponsive;
-                }
-            }
+                $objResponsiveConfig = SlickConfigModel::findByPk($config['slick_settings']);
 
-            if ($key == 'slick_asNavFor')
-            {
-                $objTargetConfig = SlickConfigModel::findByPk($value);
-
-                if ($objTargetConfig !== null)
-                {
-                    $value = static::getSlickContainerSelectorFromModel($objTargetConfig);
+                if ($objResponsiveConfig === null) {
+                    continue;
                 }
-                else
-                {
-                    $value = null; // should be null by default
+
+                if ($objResponsiveConfig->tstamp > $objFile->mtime) {
+                    $rewrite = true;
+                    break;
                 }
-            }
-
-            if ($key)
-
-            {
-                $arrConfig[$slickKey] = $value;
             }
         }
 
-        // remove responsive settings, otherwise center wont work
-        if (empty($arrResponsive))
-        {
-            unset($arrConfig['responsive']);
-        }
-
-        $arrReturn = [
-            'config'  => $arrConfig,
-            'objects' => $arrObjects,
-        ];
-
-        return $arrReturn;
+        return $rewrite;
     }
 
-    public static function stripNamespaceFromClassName($obj)
+    public static function getCssClassForContent($id)
     {
-        $classname = get_class($obj);
+        return 'slick-content-' . $id;
+    }
 
-        if (preg_match('@\\\\([\w]+)$@', $classname, $matches))
-        {
-            $classname = $matches[1];
-        }
-
-        return $classname;
+    public static function getCssClassFromModel($objConfig)
+    {
+        return static::getSlickCssClassFromModel($objConfig) . (strlen($objConfig->cssClass) > 0 ? ' ' . $objConfig->cssClass : '') . ' slick_uid_' . uniqid();
     }
 }
 

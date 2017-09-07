@@ -1,6 +1,6 @@
 {
-	"directory" : "assets/vendor/",
-	"ignoredDependencies": [
-		"jquery"
-	]
+  "directory": "assets/vendor/",
+  "ignoredDependencies": [
+    "jquery"
+  ]
 }
