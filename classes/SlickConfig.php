@@ -162,13 +162,21 @@ class SlickConfig extends \Controller
                 }
             }
 
-            if ($key == 'slick_asNavFor' && $value > 0) {
-                $objTargetConfig = SlickConfigModel::findByPk($value);
+            if ($key == 'slick_asNavFor') {
 
-                if ($objTargetConfig !== null) {
-                    $value = static::getSlickContainerSelectorFromModel($objTargetConfig);
-                } else {
-                    $value = null; // should be null by default
+                if($value > 0)
+                {
+                    $objTargetConfig = SlickConfigModel::findByPk($value);
+
+                    if ($objTargetConfig !== null) {
+                        $value = static::getSlickContainerSelectorFromModel($objTargetConfig);
+                    } else {
+                        $value = null; // should be null by default
+                    }
+                }
+
+                if(!$value){
+                    continue;
                 }
             }
 

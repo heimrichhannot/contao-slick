@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.12] - 2017-09-12
+
+### Fixed
+- `asNavFor` when no nav is set 
+
 ## [1.4.11] - 2017-09-07
 
 ### Fixed
