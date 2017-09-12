@@ -1,19 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.4.12] - 2017-09-12
+## [1.4.10] - 2017-09-12
 
 ### Fixed
 - `asNavFor` when no nav is set 
-
-## [1.4.11] - 2017-09-07
-
-### Fixed
 - reduced unnecessary sql queries
-
-## [1.4.10] - 2017-08-28
-
-### Fixed
 - adjusted image meta data handling for contao 4
 
 ## [1.4.9] - 2017-08-28
