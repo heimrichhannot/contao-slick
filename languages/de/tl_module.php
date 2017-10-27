@@ -8,6 +8,14 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
+$lang = &$GLOBALS['TL_LANG']['tl_module'];
+
+/**
+ * Fields
+ */
+$lang['useSlickGallery'][0] = 'Slick-Galerie verwenden';
+$lang['useSlickGallery'][1] = 'Wählen Sie diese Option, wenn Galerien als Slick-Galerie gerendert werden sollen.';
+
 /**
  * Modules
  */

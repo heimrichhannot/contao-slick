@@ -31,7 +31,7 @@ class Hooks extends \Controller
 
     public function parseArticlesHook(&$objTemplate, $arrArticle, $objModule)
     {
-        if (!$arrArticle['addGallery']) {
+        if (!$arrArticle['addGallery'] || !$objModule->useSlickGallery) {
             return;
         }
 

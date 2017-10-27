@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.11] - 2017-10-27
+
+### Added
+- option for enabled/disabling slick gallery in news reader: useSlickGallery
+
 ## [1.4.10] - 2017-09-12
 
 ### Fixed
