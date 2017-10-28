@@ -290,7 +290,7 @@ class Slick extends \Frontend
 
         // Use the file name as title if none is given
         if ($arrMeta['title'] == '') {
-            $arrMeta['title'] = \StringUtil::specialchars($file->basename);
+            $arrMeta['title'] = \StringUtil::sanitizeFileName($file->basename);
         }
 
         $image = [
