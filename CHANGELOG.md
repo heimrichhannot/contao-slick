@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.12] - 2017-11-01
+
+### Fixed
+
+- `\StringUtil::specialchars()` not available in contao 3.x, replaced with old `specialchars` function (should be changed with contao 5.x)
+
 ## [1.4.11] - 2017-10-27
 
 ### Added
