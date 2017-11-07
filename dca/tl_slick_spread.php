@@ -464,8 +464,8 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
                             'exclude'   => true,
                             'inputType' => 'text',
                             'eval'      => [
-                                'style' => 'width:100px',
-                                'rgxp'  => 'digit',
+                                'groupStyle' => 'width:100px',
+                                'rgxp'       => 'digit',
                             ],
                         ],
                         'slick_settings'   => [
@@ -473,7 +473,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
                             'inputType'        => 'select',
                             'options_callback' => ['tl_slick_spread', 'getConfigurations'],
                             'eval'             => [
-                                'style'              => 'width:400px',
+                                'groupStyle'         => 'width:400px',
                                 'includeBlankOption' => true,
                             ],
                         ],

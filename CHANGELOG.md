@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.13] - 2017-11-07
+
+### Fixed
+
+- breakpoint widths in be
+
+### Changed
+- increased required minimum multi_column_editor version to 1.2.10
+
 ## [1.4.12] - 2017-11-01
 
 ### Fixed
