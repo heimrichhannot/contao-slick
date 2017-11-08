@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.14] - 2017-11-07
+
+### Fixed
+- Spread datacontainer hook for `tl_content` tried to drop `slickgalleryTpl` and `slickConfig` occasionally
+
 ## [1.4.13] - 2017-11-07
 
 ### Fixed

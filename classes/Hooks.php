@@ -73,7 +73,9 @@ class Hooks extends \Controller
             return false;
         }
 
-        \Controller::loadDataContainer(static::$strSpreadDca);
+        if (!isset($GLOBALS['loadDataContainer'][static::$strSpreadDca])) {
+            \Controller::loadDataContainer(static::$strSpreadDca, true);
+        }
 
         if (!is_array($GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'])) {
             return false;
@@ -86,11 +88,6 @@ class Hooks extends \Controller
         }
 
         foreach ($GLOBALS['TL_SLICK']['SUPPORTED'][$strName] as $strPalette => $replace) {
-
-            $arrFields    = [];
-            $arrFieldKeys = [];
-            $arrSelectors = [];
-            $arrSubFields = [];
 
             preg_match_all('#\[\[(?P<constant>.+)\]\]#', $replace, $matches);
 
@@ -210,3 +207,4 @@ class Hooks extends \Controller
     }
 
 }
+
