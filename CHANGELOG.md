@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2017-11-13
+
+### Changed
+- slick.js updated from version `1.6.0` to `1.8.0`
+- `slick_slide` default value changed from `div` to `''`
+- `slick_mobileFirst` default value changed from `true` to `false`
+- `slick_speed` default value changed from `3000` to `300` 
+ 
+
 ## [1.4.15] - 2017-11-13
 
 ### Fixed
