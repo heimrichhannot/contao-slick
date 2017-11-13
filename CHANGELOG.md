@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.15] - 2017-11-13
+
+### Fixed
+- Database update: `tl_content` tried to drop `slickgalleryTpl` and `slickConfig`
+
 ## [1.4.14] - 2017-11-07
 
 ### Fixed

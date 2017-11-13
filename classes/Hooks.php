@@ -69,16 +69,14 @@ class Hooks extends \Controller
      */
     public function loadDataContainerHook($strName)
     {
+        \Controller::loadDataContainer(static::$strSpreadDca);
+
         if (!is_array($GLOBALS['TL_SLICK']['SUPPORTED']) || !in_array($strName, array_keys($GLOBALS['TL_SLICK']['SUPPORTED']))) {
             return false;
         }
 
-        if (!isset($GLOBALS['loadDataContainer'][static::$strSpreadDca])) {
-            \Controller::loadDataContainer(static::$strSpreadDca, true);
-        }
-
         if (!is_array($GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'])) {
-            return false;
+            $GLOBALS['TL_DCA'][static::$strSpreadDca]['fields'] =  [];
         }
 
         $dc = &$GLOBALS['TL_DCA'][$strName];
@@ -124,6 +122,11 @@ class Hooks extends \Controller
                 }
 
                 $dc['palettes'][$strPalette] = str_replace($search, $replace, $dc['palettes'][$strPalette]);
+            }
+
+            if(!is_array($GLOBALS['TL_DCA'][static::$strSpreadDca]['palettes']['__selector__']))
+            {
+                $GLOBALS['TL_DCA'][static::$strSpreadDca]['palettes']['__selector__'] = [];
             }
 
             // inject subplattes & selectors
@@ -207,4 +210,3 @@ class Hooks extends \Controller
     }
 
 }
-

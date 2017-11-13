@@ -9,10 +9,6 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
-if (!isset($GLOBALS['loadDataContainer']['tl_content'])) {
-    \Controller::loadDataContainer('tl_content', true);
-}
-
 // reusable palettes extension for tl_news, tl_content, tl_module etc
 $GLOBALS['TL_DCA']['tl_slick_spread'] = [
     'palettes'    => [

@@ -10,17 +10,18 @@
 
 class SlickRunOnce extends Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
-    public function run()
-    {
-        if (class_exists('\\HeimrichHannot\\Slick\\SlickUpdater')) {
-            \HeimrichHannot\Slick\SlickUpdater::run();
-        }
-    }
+	public function run()
+	{
+		if(class_exists('\\HeimrichHannot\\Slick\\SlickUpdater'))
+		{
+			\HeimrichHannot\Slick\SlickUpdater::run();
+		}
+	}
 }
 
 $objRunOnce = new SlickRunOnce();
