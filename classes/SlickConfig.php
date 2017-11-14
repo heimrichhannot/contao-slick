@@ -46,7 +46,13 @@ class SlickConfig extends \Controller
 
         // simple file caching
         if (static::doRewrite($objConfig, $objFile, $objFileMinified, $minify, $debug)) {
+            $debug = \Config::get('debugMode');
+            \Config::set('debugMode', false);
+
             $strChunk = $objT->parse();
+
+            \Config::set('debugMode', $debug);
+
 
             if (!$objFile->write($objT->parse())) {
                 \System::log('Unable to create slick config js file within assets/js, check file permissions!', __METHOD__, TL_ERROR);
@@ -61,7 +67,7 @@ class SlickConfig extends \Controller
                 $objFileMinified = new \File($strFileMinified);
                 $objMinify       = new \MatthiasMullie\Minify\JS();
                 $objMinify->add($strChunk);
-                $objFileMinified->write(rtrim($objMinify->minify(), ";") . ";"); // append semicolon, otherwise "(intermediate value)(...) is not a function"
+                $objFileMinified->write($objMinify->minify()); // append semicolon, otherwise "(intermediate value)(...) is not a function"
                 $objFileMinified->close();
             }
         }
@@ -164,8 +170,7 @@ class SlickConfig extends \Controller
 
             if ($key == 'slick_asNavFor') {
 
-                if($value > 0)
-                {
+                if ($value > 0) {
                     $objTargetConfig = SlickConfigModel::findByPk($value);
 
                     if ($objTargetConfig !== null) {
@@ -175,7 +180,7 @@ class SlickConfig extends \Controller
                     }
                 }
 
-                if(!$value){
+                if (!$value) {
                     continue;
                 }
             }
@@ -297,4 +302,5 @@ class SlickConfig extends \Controller
         return static::getSlickCssClassFromModel($objConfig) . (strlen($objConfig->cssClass) > 0 ? ' ' . $objConfig->cssClass : '') . ' slick_uid_' . uniqid();
     }
 }
+
 

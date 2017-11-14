@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5.1] - 2017-11-14
+
+### Fixed
+- prevent contao from adding `<!-- TEMPLATE START -->` and `<!-- TEMPLATE END -->` to generated js files by disabling `debugMode` while parsing template
+
 ## [1.5.0] - 2017-11-13
 
 ### Changed
