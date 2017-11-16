@@ -67,7 +67,7 @@ class SlickConfig extends \Controller
                 $objFileMinified = new \File($strFileMinified);
                 $objMinify       = new \MatthiasMullie\Minify\JS();
                 $objMinify->add($strChunk);
-                $objFileMinified->write($objMinify->minify()); // append semicolon, otherwise "(intermediate value)(...) is not a function"
+                $objFileMinified->write(rtrim($objMinify->minify(), ";") . ";"); // append semicolon, otherwise "(intermediate value)(...) is not a function"
                 $objFileMinified->close();
             }
         }
@@ -302,5 +302,6 @@ class SlickConfig extends \Controller
         return static::getSlickCssClassFromModel($objConfig) . (strlen($objConfig->cssClass) > 0 ? ' ' . $objConfig->cssClass : '') . ' slick_uid_' . uniqid();
     }
 }
+
 
 
