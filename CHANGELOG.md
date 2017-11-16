@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5.2] - 2017-11-16
+
+### Fixed
+- restored fix for `(intermediate value)(...) is not a function` error
+
 ## [1.5.1] - 2017-11-14
 
 ### Fixed
