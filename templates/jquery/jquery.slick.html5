@@ -13,7 +13,7 @@ if(total > 1){
 
 var config = {<?= $this->config; ?>};
 
-var slick = el.slick(config);
+var slick = el.not('.slick-initialized').slick(config);
 
 <?php if ($this->randomActive): ?>
     slick.slick('slickGoTo', Math.floor( Math.random() * total), true);

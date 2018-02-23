@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5.4] - 2018-02-23
+
+### Fixed
+- `Uncaught TypeError: Cannot read property 'add' of null` (https://github.com/kenwheeler/slick/issues/1953), check that `.slick-initialized` not set before init slick
+
 ## [1.5.2] - 2017-11-16
 
 ### Fixed
