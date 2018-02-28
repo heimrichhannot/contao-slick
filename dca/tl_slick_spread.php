@@ -12,7 +12,7 @@
 // reusable palettes extension for tl_news, tl_content, tl_module etc
 $GLOBALS['TL_DCA']['tl_slick_spread'] = [
     'palettes'    => [
-        '__selector__'             => ['addSlick', 'addGallery'],
+        '__selector__'             => ['addSlick', 'addGallery','slick_pausePlay'],
         SLICK_PALETTE_DEFAULT      => '{slick_legend},addSlick;',
         SLICK_PALETTE_PRESETCONFIG => '{slick_config},slickConfig;',
         SLICK_PALETTE_GALLERY      => '{slick_gallery},addGallery;',
@@ -27,6 +27,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
 							slick_asNavFor,
 							slick_prevArrow,
 							slick_nextArrow,
+							slick_pausePlay,
 							slick_autoplay,
 							slick_autoplaySpeed,
 							slick_centerMode,
@@ -74,6 +75,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
 							cssClass
 							',
         'addGallery' => 'slickMultiSRC,slickSortBy,slickUseHomeDir,slickSize,slickFullsize,slickNumberOfItems,slickgalleryTpl,slickCustomTpl',
+        'slick_pausePlay' => 'slick_pauseButton, slick_playButton',
     ],
     'fields'      => [
         'slickConfig'            => [
@@ -241,6 +243,43 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
             ],
             'sql'       => "varchar(255) NOT NULL default ''",
         ],
+        'slick_pausePlay'           => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_addPausePlay'],
+            'inputType' => 'checkbox',
+            'exclude'   => true,
+            'eval'      => array
+            (
+                'submitOnChange' => true
+            ),
+            'sql'       => "char(1) NOT NULL default ''",
+        ),
+        'slick_pauseButton'        => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pauseButton'],
+            'inputType' => 'text',
+            'exclude'   => true,
+            'default'   => '<button type="button" data-role="none" class="slick-pause">Pause</button>',
+            'eval'      => array
+            (
+                'tl_class'  => 'long',
+                'allowHtml' => true,
+            ),
+            'sql'       => "varchar(255) NOT NULL default ''",
+        ),
+        'slick_playButton'        => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_playButton'],
+            'inputType' => 'text',
+            'exclude'   => true,
+            'default'   => '<button type="button" data-role="none" class="slick-play">Play</button>',
+            'eval'      => array
+            (
+                'tl_class'  => 'long',
+                'allowHtml' => true,
+            ),
+            'sql'       => "varchar(255) NOT NULL default ''",
+        ),
         'slick_autoplay'         => [
             'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_autoplay'],
             'inputType' => 'checkbox',

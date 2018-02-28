@@ -42,10 +42,14 @@
                 adaptiveHeight: false,
                 appendArrows: $(element),
                 appendDots: $(element),
+                appendButtons: $(element),
                 arrows: true,
                 asNavFor: null,
                 prevArrow: '<button class="slick-prev" aria-label="Previous" type="button">Previous</button>',
                 nextArrow: '<button class="slick-next" aria-label="Next" type="button">Next</button>',
+                pausePlay: false,
+                pauseButton: '<button type="button" data-role="none" class="slick-pause" aria-label="Pause" tabindex="0" role="button">Pause</button>',
+                playButton: '<button type="button" data-role="none" class="slick-play" aria-label="Play" tabindex="0" role="button">Play</button>',
                 autoplay: false,
                 autoplaySpeed: 3000,
                 centerMode: false,
@@ -100,11 +104,14 @@
                 currentSlide: 0,
                 direction: 1,
                 $dots: null,
+                $pausePlay: null,
                 listWidth: null,
                 listHeight: null,
                 loadIndex: 0,
                 $nextArrow: null,
                 $prevArrow: null,
+                $pauseButton: null,
+                $playButton: null,
                 scrolling: false,
                 slideCount: null,
                 slideWidth: null,
@@ -479,6 +486,42 @@
 
     };
 
+    Slick.prototype.buildPausePlayButtons = function() {
+
+        var _ = this;
+
+        if (_.options.pausePlay === true ) {
+
+            _.$pauseButton = $(_.options.pauseButton).addClass('slick-button');
+            _.$playButton = $(_.options.playButton).addClass('slick-button');
+
+
+            if( _.slideCount > _.options.slidesToShow ) {
+
+                _.$pauseButton.removeClass('slick-hidden').removeAttr('aria-hidden tabindex');
+                _.$playButton.removeClass('slick-hidden').removeAttr('aria-hidden tabindex');
+
+
+                if (_.htmlExpr.test(_.options.pauseButton)) {
+                    _.$pauseButton.prependTo(_.options.appendButtons);
+                }
+
+                if (_.htmlExpr.test(_.options.playButton)) {
+                    _.$playButton.appendTo(_.options.appendButtons);
+                }
+            } else {
+
+                _.$pauseButton.add( _.$playButton )
+
+                    .addClass('slick-hidden')
+                    .attr({
+                        'aria-disabled': 'true',
+                        'tabindex': '-1'
+                    });
+            }
+        }
+    };
+
     Slick.prototype.buildDots = function() {
 
         var _ = this,
@@ -539,10 +582,11 @@
 
         _.buildArrows();
 
+        _.buildPausePlayButtons();
+
         _.buildDots();
 
         _.updateDots();
-
 
         _.setSlideClasses(typeof _.currentSlide === 'number' ? _.currentSlide : 0);
 
@@ -1426,6 +1470,24 @@
 
     };
 
+    Slick.prototype.initPausePlayEvents = function() {
+
+        var _ = this;
+
+
+        if ( _.options.pausePlay === true) {
+            $(_.$pauseButton).on('click.slick', function(){
+                _.pause();
+                _.updatePause();
+            });
+            $(_.$playButton).on('click.slick', function(){
+                _.play();
+                _.$nextArrow.click();
+                _.updatePlay();
+            });
+        }
+    };
+
     Slick.prototype.initializeEvents = function() {
 
         var _ = this;
@@ -1433,6 +1495,7 @@
         _.initArrowEvents();
 
         _.initDotEvents();
+        _.initPausePlayEvents();
         _.initSlideEvents();
 
         _.$list.on('touchstart.slick mousedown.slick', {
@@ -1923,8 +1986,10 @@
         _.updateArrows();
         _.initArrowEvents();
         _.buildDots();
+        _.buildPausePlayButtons();
         _.updateDots();
         _.initDotEvents();
+        _.initPausePlayEvents();
         _.cleanUpSlideEvents();
         _.initSlideEvents();
 
@@ -2969,6 +3034,19 @@
 
         }
 
+    };
+
+    Slick.prototype.updatePause = function() {
+        var _ = this;
+        $(_.$pauseButton).hide();
+        $(_.$playButton).show();
+    };
+
+    Slick.prototype.updatePlay = function() {
+        var _ = this;
+
+        $(_.$playButton).hide();
+        $(_.$pauseButton).show();
     };
 
     Slick.prototype.visibility = function() {

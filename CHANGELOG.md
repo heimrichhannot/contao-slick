@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2018-02-28
+
+### Added
+- play and pause buttons
+
 ## [1.5.3] - 2018-02-23
 
 ### Fixed
