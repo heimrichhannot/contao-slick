@@ -12,14 +12,14 @@
 // reusable palettes extension for tl_news, tl_content, tl_module etc
 $GLOBALS['TL_DCA']['tl_slick_spread'] = [
     'palettes'    => [
-        '__selector__'             => ['addSlick', 'addGallery','slick_pausePlay'],
+        '__selector__'             => ['addSlick', 'addGallery', 'slick_pausePlay'],
         SLICK_PALETTE_DEFAULT      => '{slick_legend},addSlick;',
         SLICK_PALETTE_PRESETCONFIG => '{slick_config},slickConfig;',
         SLICK_PALETTE_GALLERY      => '{slick_gallery},addGallery;',
         SLICK_PALETTE_CONTENT      => '{type_legend},type;{slick_config},slickConfig;{source_legend},multiSRC,sortBy,useHomeDir;{image_legend},size,fullsize,numberOfItems;{template_legend:hide},slickgalleryTpl,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
     ],
     'subpalettes' => [
-        'addSlick'   => '	slick_accessibility,
+        'addSlick'        => '	slick_accessibility,
 							slick_adaptiveHeight,
 							slick_appendArrows,
 							slick_appendDots,
@@ -27,8 +27,8 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
 							slick_asNavFor,
 							slick_prevArrow,
 							slick_nextArrow,
-							slick_pausePlay,
 							slick_autoplay,
+							slick_pausePlay,
 							slick_autoplaySpeed,
 							slick_centerMode,
 							slick_centerPadding,
@@ -74,7 +74,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
 							afterInitCallback,
 							cssClass
 							',
-        'addGallery' => 'slickMultiSRC,slickSortBy,slickUseHomeDir,slickSize,slickFullsize,slickNumberOfItems,slickgalleryTpl,slickCustomTpl',
+        'addGallery'      => 'slickMultiSRC,slickSortBy,slickUseHomeDir,slickSize,slickFullsize,slickNumberOfItems,slickgalleryTpl,slickCustomTpl',
         'slick_pausePlay' => 'slick_pauseButton, slick_playButton',
     ],
     'fields'      => [
@@ -243,43 +243,38 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
             ],
             'sql'       => "varchar(255) NOT NULL default ''",
         ],
-        'slick_pausePlay'           => array
-        (
-            'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_addPausePlay'],
+        'slick_pausePlay'        => [
+            'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pausePlay'],
             'inputType' => 'checkbox',
             'exclude'   => true,
-            'eval'      => array
-            (
-                'submitOnChange' => true
-            ),
+            'eval'      => [
+                'submitOnChange' => true,
+                'tl_class'       => 'clr'
+            ],
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'slick_pauseButton'        => array
-        (
+        ],
+        'slick_pauseButton'      => [
             'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pauseButton'],
             'inputType' => 'text',
             'exclude'   => true,
-            'default'   => '<button type="button" data-role="none" class="slick-pause">Pause</button>',
-            'eval'      => array
-            (
+            'default'   => '<button type="button" data-role="none" class="slick-pause" aria-label="Pause" tabindex="0" role="button">Pause</button>',
+            'eval'      => [
                 'tl_class'  => 'long',
                 'allowHtml' => true,
-            ),
+            ],
             'sql'       => "varchar(255) NOT NULL default ''",
-        ),
-        'slick_playButton'        => array
-        (
+        ],
+        'slick_playButton'       => [
             'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_playButton'],
             'inputType' => 'text',
             'exclude'   => true,
-            'default'   => '<button type="button" data-role="none" class="slick-play">Play</button>',
-            'eval'      => array
-            (
+            'default'   => '<button type="button" data-role="none" class="slick-play" aria-label="Play" tabindex="0" role="button">Play</button>',
+            'eval'      => [
                 'tl_class'  => 'long',
                 'allowHtml' => true,
-            ),
+            ],
             'sql'       => "varchar(255) NOT NULL default ''",
-        ),
+        ],
         'slick_autoplay'         => [
             'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_autoplay'],
             'inputType' => 'checkbox',
@@ -305,7 +300,7 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
             'inputType' => 'checkbox',
             'exclude'   => true,
             'eval'      => [
-                'tl_class' => 'w50',
+                'tl_class' => 'w50 clr',
             ],
             'sql'       => "char(1) NOT NULL default ''",
         ],
@@ -522,13 +517,13 @@ $GLOBALS['TL_DCA']['tl_slick_spread'] = [
         'slick_rows'             => [
             'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_rows'],
             'inputType' => 'text',
-            'default'   => 1,
+            'default'   => 0,
             'exclude'   => true,
             'eval'      => [
                 'tl_class' => 'w50',
                 'rgxp'     => 'digit',
             ],
-            'sql'       => "smallint(5) unsigned NOT NULL default '1'",
+            'sql'       => "smallint(5) unsigned NOT NULL default '0'",
         ],
         'slick_rtl'              => [
             'label'     => &$GLOBALS['TL_LANG']['tl_slick_spread']['slick_rtl'],

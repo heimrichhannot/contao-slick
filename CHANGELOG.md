@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.1] - 2018-03-14
+
+### Fixed
+- set `rows` initial to `0` otherwise an additional `div` wrapper will be added, see https://github.com/kenwheeler/slick/issues/3110
+- play and pause button localization
+
 ## [1.6.0] - 2018-02-28
 
 ### Added

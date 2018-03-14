@@ -38,6 +38,11 @@ $GLOBALS['TL_LANG']['tl_slick_spread']['slick_nextArrow']    = ['nextArrow', 'HT
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_autoplay']      = ['autoplay', 'Automatisches Abspielen aktivieren. Standard: false'];
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_autoplaySpeed'] = ['autoplaySpeed', 'Geschwindigkeit des Übergangseffekt für automatisches Abspielen. Standard: 3000'];
 
+$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pausePlay']   = ['pause/play hinzufügen', 'Füge Pause und Play Schaltflächen hinzu.'];
+$GLOBALS['TL_LANG']['tl_slick_spread']['slick_pauseButton'] = ['pause button', 'HTML der Pause Schaltfläche'];
+$GLOBALS['TL_LANG']['tl_slick_spread']['slick_playButton']  = ['play button', 'HTML der Play Schaltfläche'];
+
+
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_centerMode']       = ['centerMode', 'Enables centered view with partial prev/next slides. Use with odd numbered slidesToShow counts. Standard: false'];
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_centerPadding']    = ['centerPadding', 'Seitlicher Abstand im zentrierten Modus. (px oder %) Standard: 50px'];
 $GLOBALS['TL_LANG']['tl_slick_spread']['slick_cssEase']          = ['cssEase', 'CSS3-Easing. Standard: ease'];
