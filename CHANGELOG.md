@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.2] - 2018-09-11
+
+### Fixed
+- #25, `tl_slick_spread.php` needs to load Datacontainer `tl_content` to work with internal cache
+
 ## [1.6.1] - 2018-03-14
 
 ### Fixed
