@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.3] - 2018-09-11
+
+### Fixed
+- #27, Headline-Field is not displayed for content slick gallery
+
 ## [1.6.2] - 2018-09-11
 
 ### Fixed
