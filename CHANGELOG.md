@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.4] - 2018-09-13
+
+### Fixed
+- do not drop `tl_content` database fields
+
 ## [1.6.3] - 2018-09-11
 
 ### Fixed

@@ -2,6 +2,8 @@
 
 namespace HeimrichHannot\Slick;
 
+use Contao\Controller;
+
 class Hooks extends \Controller
 {
 
@@ -85,6 +87,11 @@ class Hooks extends \Controller
             return;
         }
 
+        if(isset($dc['config']['ctable']) && is_array($dc['config']['ctable']) && in_array('tl_content', $dc['config']['ctable']))
+        {
+            Controller::loadDataContainer('tl_content');
+        }
+
         foreach ($GLOBALS['TL_SLICK']['SUPPORTED'][$strName] as $strPalette => $replace) {
 
             preg_match_all('#\[\[(?P<constant>.+)\]\]#', $replace, $matches);
@@ -92,6 +99,7 @@ class Hooks extends \Controller
             if (!isset($matches['constant'][0])) {
                 continue;
             }
+
 
             $strConstant       = $matches['constant'][0];
             $strReplacePalette = @constant($matches['constant'][0]);
