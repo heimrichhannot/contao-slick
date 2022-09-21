@@ -2,7 +2,7 @@
 
 > If you are on Contao 4, please use https://github.com/heimrichhannot/contao-slick-bundle or https://github.com/heimrichhannot/contao-tiny-slider-bundle.
 
-> This bundle is NOT actively maintained anymore! 
+> This extension is NOT actively maintained anymore! 
 
 A content slider/carousel for contao based on [kenwheelers slick carousel](http://kenwheeler.github.io/slick/).
 
